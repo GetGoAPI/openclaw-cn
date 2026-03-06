@@ -102,8 +102,8 @@ export async function runOnboardingWizard(
     return;
   }
 
-  const quickstartHint = `Configure details later via ${formatCliCommand("openclaw configure")}.`;
-  const manualHint = "Configure port, network, Tailscale, and auth options.";
+  const quickstartHint = `Configure details later via ${formatCliCommand("openclaw configure")}. (稍后通过 openclaw configure 配置详情)`;
+  const manualHint = "Configure port, network, Tailscale, and auth options. (配置端口、网络、Tailscale 和身份验证选项)";
   const explicitFlowRaw = opts.flow?.trim();
   const normalizedExplicitFlow = explicitFlowRaw === "manual" ? "advanced" : explicitFlowRaw;
   if (
@@ -122,10 +122,10 @@ export async function runOnboardingWizard(
   let flow: WizardFlow =
     explicitFlow ??
     (await prompter.select({
-      message: "Onboarding mode",
+      message: "Onboarding mode (向导模式)",
       options: [
-        { value: "quickstart", label: "QuickStart", hint: quickstartHint },
-        { value: "advanced", label: "Manual", hint: manualHint },
+        { value: "quickstart", label: "QuickStart (快速开始)", hint: quickstartHint },
+        { value: "advanced", label: "Manual (手动配置)", hint: manualHint },
       ],
       initialValue: "quickstart",
     }));
