@@ -3,7 +3,7 @@
 # Or: & ([scriptblock]::Create((iwr -useb https://openclaw.ai/install.ps1))) -NoOnboard
 
 param(
-    [string]$InstallMethod = "npm",
+    [string]$InstallMethod = "git",
     [string]$Tag = "latest",
     [string]$GitDir = "$env:USERPROFILE\openclaw",
     [switch]$NoOnboard,
@@ -222,7 +222,7 @@ function Install-OpenClawGit {
     
     if (!(Test-Path $RepoDir)) {
         Write-Host "  Cloning repository..." -Level info
-        git clone https://github.com/openclaw/openclaw.git $RepoDir 2>&1
+        git clone https://github.com/GetGoAPI/openclaw-cn.git $RepoDir 2>&1
     } elseif ($Update) {
         Write-Host "  Updating repository..." -Level info
         git -C $RepoDir pull --rebase 2>&1

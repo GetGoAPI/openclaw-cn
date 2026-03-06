@@ -1896,7 +1896,7 @@ resolve_openclaw_bin() {
 
 install_openclaw_from_git() {
     local repo_dir="$1"
-    local repo_url="https://github.com/openclaw/openclaw.git"
+    local repo_url="https://github.com/GetGoAPI/openclaw-cn.git"
 
     if [[ -d "$repo_dir/.git" ]]; then
         ui_info "Installing OpenClaw from git checkout: ${repo_dir}"
@@ -2178,7 +2178,7 @@ main() {
     if [[ -z "$INSTALL_METHOD" && -n "$detected_checkout" ]]; then
         if ! is_promptable; then
             ui_info "Found OpenClaw checkout but no TTY; defaulting to npm install"
-            INSTALL_METHOD="npm"
+            INSTALL_METHOD="git"
         else
             local selected_method=""
             selected_method="$(choose_install_method_interactive "$detected_checkout" || true)"
@@ -2196,7 +2196,7 @@ main() {
     fi
 
     if [[ -z "$INSTALL_METHOD" ]]; then
-        INSTALL_METHOD="npm"
+        INSTALL_METHOD="git"
     fi
 
     if [[ "$INSTALL_METHOD" != "npm" && "$INSTALL_METHOD" != "git" ]]; then
