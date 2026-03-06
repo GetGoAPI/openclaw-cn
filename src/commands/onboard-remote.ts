@@ -169,7 +169,7 @@ export async function promptRemoteGatewayConfig(
       prompter,
       explicitMode: options?.secretInputMode,
       copy: {
-        modeMessage: "How do you want to provide this gateway token?",
+        modeMessage: "How do you want to provide this gateway token? (你打算如何提供此网关 Token？)",
         plaintextLabel: "Enter token now",
         plaintextHint: "Stores the token directly in OpenClaw config",
       },
@@ -201,7 +201,7 @@ export async function promptRemoteGatewayConfig(
       prompter,
       explicitMode: options?.secretInputMode,
       copy: {
-        modeMessage: "How do you want to provide this gateway password?",
+        modeMessage: "How do you want to provide this gateway password? (你打算如何提供此网关密码？)",
         plaintextLabel: "Enter password now",
         plaintextHint: "Stores the password directly in OpenClaw config",
       },

@@ -447,7 +447,7 @@ export async function promptSingleChannelSecretInput(params: {
     prompter: params.prompter as WizardPrompter,
     explicitMode: params.secretInputMode,
     copy: {
-      modeMessage: `How do you want to provide this ${params.credentialLabel}?`,
+      modeMessage: `How do you want to provide this ${params.credentialLabel}? (你打算如何提供此 ${params.credentialLabel}？)`,
       plaintextLabel: `Enter ${params.credentialLabel}`,
       plaintextHint: "Stores the credential directly in OpenClaw config",
       refLabel: "Use external secret provider",

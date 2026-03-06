@@ -34,7 +34,7 @@ export async function applyAuthChoiceAnthropic(
       prompter: params.prompter,
       explicitMode: requestedSecretInputMode,
       copy: {
-        modeMessage: "How do you want to provide this setup token?",
+        modeMessage: "How do you want to provide this setup token? (你打算如何提供此设置 Token？)",
         plaintextLabel: "Paste setup token now",
         plaintextHint: "Stores the token directly in the auth profile",
       },

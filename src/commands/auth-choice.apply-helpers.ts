@@ -389,7 +389,7 @@ export async function resolveSecretInputModeForEnvSelection(params: {
     return "plaintext";
   }
   const selected = await params.prompter.select<SecretInputMode>({
-    message: params.copy?.modeMessage ?? "How do you want to provide this API key?",
+    message: params.copy?.modeMessage ?? "How do you want to provide this API key? (你打算如何提供此 API 密钥？)",
     initialValue: "plaintext",
     options: [
       {
