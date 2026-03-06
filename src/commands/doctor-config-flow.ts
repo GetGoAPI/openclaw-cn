@@ -1413,11 +1413,11 @@ function detectEmptyAllowlistPolicy(cfg: OpenClawConfig): string[] {
       if (!hasAllowFromEntries(effectiveGroupAllowFrom)) {
         if (fallbackToAllowFrom) {
           warnings.push(
-            `- ${prefix}.groupPolicy is "allowlist" but groupAllowFrom (and allowFrom) is empty — all group messages will be silently dropped. Add sender IDs to ${prefix}.groupAllowFrom or ${prefix}.allowFrom, or set groupPolicy to "open".`,
+            `- ${prefix}.groupPolicy 为 "allowlist"（白名单模式）但是 groupAllowFrom（以及 allowFrom）为空 — 所有群组消息将被静默丢弃。请添加发送者 ID 到 ${prefix}.groupAllowFrom 或 ${prefix}.allowFrom，或者将 groupPolicy 设置为 "open"（公开）。`,
           );
         } else {
           warnings.push(
-            `- ${prefix}.groupPolicy is "allowlist" but groupAllowFrom is empty — this channel does not fall back to allowFrom, so all group messages will be silently dropped. Add sender IDs to ${prefix}.groupAllowFrom, or set groupPolicy to "open".`,
+            `- ${prefix}.groupPolicy 为 "allowlist"（白名单模式）但是 groupAllowFrom 为空 — 由于本频道没有配置 allowFrom 后备选项，所有群组消息将被静默丢弃。请添加发送者 ID 到 ${prefix}.groupAllowFrom，或者将 groupPolicy 设置为 "open"（公开）。`,
           );
         }
       }

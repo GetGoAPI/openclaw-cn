@@ -362,7 +362,7 @@ export async function runGreetingPromptForBareNewOrReset(params: {
   expect(text).toBe("hello");
   expect(runEmbeddedPiAgentMock).toHaveBeenCalledOnce();
   const prompt = runEmbeddedPiAgentMock.mock.calls.at(-1)?.[0]?.prompt ?? "";
-  expect(prompt).toContain("A new session was started via /new or /reset");
+  expect(prompt).toContain("新会话已通过 /new 或 /reset 开始。");
   expect(prompt).toContain("Execute your Session Startup sequence now");
 }
 
