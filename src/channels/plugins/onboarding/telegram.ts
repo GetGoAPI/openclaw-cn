@@ -29,10 +29,10 @@ const channel = "telegram" as const;
 async function noteTelegramTokenHelp(prompter: WizardPrompter): Promise<void> {
   await prompter.note(
     [
-      "1) Open Telegram and chat with @BotFather",
-      "2) Run /newbot (or /mybots)",
-      "3) Copy the token (looks like 123456:ABC...)",
-      "Tip: you can also set TELEGRAM_BOT_TOKEN in your env.",
+      "1) Open Telegram and chat with @BotFather (在 Telegram 中打开并与 @BotFather 聊天)",
+      "2) Run /newbot (or /mybots) (运行 /newbot 或 /mybots)",
+      "3) Copy the token (looks like 123456:ABC...) (复制 Token (格式如 123456:ABC...))",
+      "Tip: you can also set TELEGRAM_BOT_TOKEN in your env. (提示：您也可以在环境变量中设置 TELEGRAM_BOT_TOKEN。)",
       `Docs: ${formatDocsLink("/telegram")}`,
       "Website: https://openclaw.ai",
     ].join("\n"),
@@ -212,7 +212,7 @@ export const telegramOnboardingAdapter: ChannelOnboardingAdapter = {
       hasConfigToken,
       envPrompt: "TELEGRAM_BOT_TOKEN detected. Use env var?",
       keepPrompt: "Telegram token already configured. Keep it?",
-      inputPrompt: "Enter Telegram bot token",
+      inputPrompt: "Enter Telegram bot token (输入 Telegram 机器人 Token)",
       preferredEnvVar: allowEnv ? "TELEGRAM_BOT_TOKEN" : undefined,
     });
 

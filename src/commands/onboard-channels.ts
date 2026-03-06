@@ -193,7 +193,7 @@ async function noteChannelPrimer(
   );
   await prompter.note(
     [
-      "DM security: default is pairing; unknown DMs get a pairing code.",
+      "DM security: default is pairing; unknown DMs get a pairing code. (私信安全：默认为配对模式；未知的私信会收到一个配对码。)",
       `Approve with: ${formatCliCommand("openclaw pairing approve <channel> <code>")}`,
       'Public DMs require dmPolicy="open" + allowFrom=["*"].',
       "Multi-user DMs: run: " +
@@ -203,7 +203,7 @@ async function noteChannelPrimer(
       "",
       ...channelLines,
     ].join("\n"),
-    "How channels work",
+    "How channels work (频道如何工作)",
   );
 }
 
