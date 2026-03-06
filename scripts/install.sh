@@ -1635,119 +1635,7 @@ check_existing_openclaw() {
     return 1
 }
 
-set_pnpm_cmd() {
-    PNPM_CMD=("$@")
-}
 
-pnpm_cmd_pretty() {
-    if [[ ${#PNPM_CMD[@]} -eq 0 ]]; then
-        echo ""
-        return 1
-    fi
-    printf '%s' "${PNPM_CMD[*]}"
-    return 0
-}
-
-pnpm_cmd_is_ready() {
-    if [[ ${#PNPM_CMD[@]} -eq 0 ]]; then
-        return 1
-    fi
-    "${PNPM_CMD[@]}" --version >/dev/null 2>&1
-}
-
-detect_pnpm_cmd() {
-    if command -v pnpm &> /dev/null; then
-        set_pnpm_cmd pnpm
-        return 0
-    fi
-    if command -v corepack &> /dev/null; then
-        if corepack pnpm --version >/dev/null 2>&1; then
-            set_pnpm_cmd corepack pnpm
-            return 0
-        fi
-    fi
-    return 1
-}
-
-ensure_pnpm() {
-    if detect_pnpm_cmd && pnpm_cmd_is_ready; then
-        ui_success "pnpm ready ($(pnpm_cmd_pretty))"
-        return 0
-    fi
-
-    if command -v corepack &> /dev/null; then
-        ui_info "Configuring pnpm via Corepack"
-        corepack enable >/dev/null 2>&1 || true
-        if ! run_quiet_step "Activating pnpm" corepack prepare pnpm@10 --activate; then
-            ui_warn "Corepack pnpm activation failed; falling back"
-        fi
-        refresh_shell_command_cache
-        if detect_pnpm_cmd && pnpm_cmd_is_ready; then
-            if [[ "${PNPM_CMD[*]}" == "corepack pnpm" ]]; then
-                ui_warn "pnpm shim not on PATH; using corepack pnpm fallback"
-            fi
-            ui_success "pnpm ready ($(pnpm_cmd_pretty))"
-            return 0
-        fi
-    fi
-
-    ui_info "Installing pnpm via npm"
-    fix_npm_permissions
-    run_quiet_step "Installing pnpm" npm install -g pnpm@10
-    refresh_shell_command_cache
-    if detect_pnpm_cmd && pnpm_cmd_is_ready; then
-        ui_success "pnpm ready ($(pnpm_cmd_pretty))"
-        return 0
-    fi
-
-    ui_error "pnpm installation failed"
-    return 1
-}
-
-ensure_pnpm_binary_for_scripts() {
-    if command -v pnpm >/dev/null 2>&1; then
-        return 0
-    fi
-
-    if command -v corepack >/dev/null 2>&1; then
-        ui_info "Ensuring pnpm command is available"
-        corepack enable >/dev/null 2>&1 || true
-        corepack prepare pnpm@10 --activate >/dev/null 2>&1 || true
-        refresh_shell_command_cache
-        if command -v pnpm >/dev/null 2>&1; then
-            ui_success "pnpm command enabled via Corepack"
-            return 0
-        fi
-    fi
-
-    if [[ "${PNPM_CMD[*]}" == "corepack pnpm" ]] && command -v corepack >/dev/null 2>&1; then
-        ensure_user_local_bin_on_path
-        local user_pnpm="${HOME}/.local/bin/pnpm"
-        cat >"${user_pnpm}" <<'EOF'
-#!/usr/bin/env bash
-set -euo pipefail
-exec corepack pnpm "$@"
-EOF
-        chmod +x "${user_pnpm}"
-        refresh_shell_command_cache
-
-        if command -v pnpm >/dev/null 2>&1; then
-            ui_warn "pnpm shim not on PATH; installed user-local wrapper at ${user_pnpm}"
-            return 0
-        fi
-    fi
-
-    ui_error "pnpm command not available on PATH"
-    ui_info "Install pnpm globally (npm install -g pnpm@10) and retry"
-    return 1
-}
-
-run_pnpm() {
-    if ! pnpm_cmd_is_ready; then
-        ensure_pnpm
-    fi
-    "${PNPM_CMD[@]}" "$@"
-}
 
 ensure_user_local_bin_on_path() {
     local target="$HOME/.local/bin"
@@ -1913,9 +1801,6 @@ install_openclaw_from_git() {
         install_git
     fi
 
-    ensure_pnpm
-    ensure_pnpm_binary_for_scripts
-
     if [[ ! -d "$repo_dir" ]]; then
         run_quiet_step "Cloning OpenClaw" git clone "$repo_url" "$repo_dir"
     fi
@@ -1930,12 +1815,12 @@ install_openclaw_from_git() {
 
     cleanup_legacy_submodules "$repo_dir"
 
-    SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" run_quiet_step "Installing dependencies" run_pnpm -C "$repo_dir" install
-
-    if ! run_quiet_step "Building UI" run_pnpm -C "$repo_dir" ui:build; then
-        ui_warn "UI build failed; continuing (CLI may still work)"
-    fi
-    run_quiet_step "Building OpenClaw" run_pnpm -C "$repo_dir" build
+    SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" run_quiet_step "Installing dependencies" npm --prefix "$repo_dir" install
+    
+    # Ignore workspace scripts checking for pnpm install
+    # For npm workspaces:
+    SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" run_quiet_step "Building UI" npm run --prefix "$repo_dir" ui:build || ui_warn "UI build failed; continuing (CLI may still work)"
+    run_quiet_step "Building OpenClaw" npm run --prefix "$repo_dir" build
 
     ensure_user_local_bin_on_path
 
@@ -1946,7 +1831,7 @@ exec node "${repo_dir}/dist/entry.js" "\$@"
 EOF
     chmod +x "$HOME/.local/bin/openclaw"
     ui_success "OpenClaw wrapper installed to \$HOME/.local/bin/openclaw"
-    ui_info "This checkout uses pnpm — run pnpm install (or corepack pnpm install) for deps"
+    ui_info "This checkout uses npm — run npm install for deps"
 }
 
 # Install OpenClaw
