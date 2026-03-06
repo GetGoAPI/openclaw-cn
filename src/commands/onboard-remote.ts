@@ -65,7 +65,7 @@ export async function promptRemoteGatewayConfig(
   const hasBonjourTool = (await detectBinary("dns-sd")) || (await detectBinary("avahi-browse"));
   const wantsDiscover = hasBonjourTool
     ? await prompter.confirm({
-        message: "Discover gateway on LAN (Bonjour)?",
+        message: "Discover gateway on LAN (Bonjour)? (搜索局域网中的网关 - Bonjour？)",
         initialValue: true,
       })
     : false;
@@ -90,7 +90,7 @@ export async function promptRemoteGatewayConfig(
 
     if (beacons.length > 0) {
       const selection = await prompter.select({
-        message: "Select gateway",
+        message: "Select gateway (选择网关)",
         options: [
           ...beacons.map((beacon, index) => ({
             value: String(index),
@@ -111,7 +111,7 @@ export async function promptRemoteGatewayConfig(
     const port = selectedBeacon.port ?? selectedBeacon.gatewayPort ?? 18789;
     if (host) {
       const mode = await prompter.select({
-        message: "Connection method",
+        message: "Connection method (连接方式)",
         options: [
           {
             value: "direct",
@@ -147,14 +147,14 @@ export async function promptRemoteGatewayConfig(
   }
 
   const urlInput = await prompter.text({
-    message: "Gateway WebSocket URL",
+    message: "Gateway WebSocket URL (网关 WebSocket URL)",
     initialValue: suggestedUrl,
     validate: (value) => validateGatewayWebSocketUrl(String(value)),
   });
   const url = ensureWsUrl(String(urlInput));
 
   const authChoice = await prompter.select({
-    message: "Gateway auth",
+    message: "Gateway auth (网关身份验证)",
     options: [
       { value: "token", label: "Token (recommended)" },
       { value: "password", label: "Password" },
@@ -189,7 +189,7 @@ export async function promptRemoteGatewayConfig(
     } else {
       token = String(
         await prompter.text({
-          message: "Gateway token",
+          message: "Gateway token (网关 Token)",
           initialValue: typeof token === "string" ? token : undefined,
           validate: (value) => (value?.trim() ? undefined : "Required"),
         }),
@@ -221,7 +221,7 @@ export async function promptRemoteGatewayConfig(
     } else {
       password = String(
         await prompter.text({
-          message: "Gateway password",
+          message: "Gateway password (网关密码)",
           initialValue: typeof password === "string" ? password : undefined,
           validate: (value) => (value?.trim() ? undefined : "Required"),
         }),

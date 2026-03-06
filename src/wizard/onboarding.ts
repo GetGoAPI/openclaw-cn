@@ -145,11 +145,11 @@ export async function runOnboardingWizard(
     );
 
     const action = await prompter.select({
-      message: "Config handling",
+      message: "Config handling (配置处理)",
       options: [
-        { value: "keep", label: "Use existing values" },
-        { value: "modify", label: "Update values" },
-        { value: "reset", label: "Reset" },
+        { value: "keep", label: "Use existing values (使用现有值)" },
+        { value: "modify", label: "Update values (更新值)" },
+        { value: "reset", label: "Reset (重置)" },
       ],
     });
 
@@ -157,16 +157,16 @@ export async function runOnboardingWizard(
       const workspaceDefault =
         baseConfig.agents?.defaults?.workspace ?? onboardHelpers.DEFAULT_WORKSPACE;
       const resetScope = (await prompter.select({
-        message: "Reset scope",
+        message: "Reset scope (重置范围)",
         options: [
-          { value: "config", label: "Config only" },
+          { value: "config", label: "Config only (仅配置)" },
           {
             value: "config+creds+sessions",
-            label: "Config + creds + sessions",
+            label: "Config + creds + sessions (配置 + 凭证 + 会话)",
           },
           {
             value: "full",
-            label: "Full reset (config + creds + sessions + workspace)",
+            label: "Full reset (config + creds + sessions + workspace) (完全重置：配置 + 凭证 + 会话 + 工作区)",
           },
         ],
       })) as ResetScope;
@@ -361,18 +361,18 @@ export async function runOnboardingWizard(
     (flow === "quickstart"
       ? "local"
       : ((await prompter.select({
-          message: "What do you want to set up?",
+          message: "What do you want to set up? (你想设置什么？)",
           options: [
             {
               value: "local",
-              label: "Local gateway (this machine)",
+              label: "Local gateway (this machine) (本地网关 - 本机)",
               hint: localProbe.ok
                 ? `Gateway reachable (${localUrl})`
                 : `No gateway detected (${localUrl})`,
             },
             {
               value: "remote",
-              label: "Remote gateway (info-only)",
+              label: "Remote gateway (info-only) (远程网关 - 仅信息)",
               hint: !remoteUrl
                 ? "No remote URL configured yet"
                 : remoteProbe?.ok
@@ -400,7 +400,7 @@ export async function runOnboardingWizard(
     (flow === "quickstart"
       ? (baseConfig.agents?.defaults?.workspace ?? onboardHelpers.DEFAULT_WORKSPACE)
       : await prompter.text({
-          message: "Workspace directory",
+          message: "Workspace directory (工作区目录)",
           initialValue: baseConfig.agents?.defaults?.workspace ?? onboardHelpers.DEFAULT_WORKSPACE,
         }));
 

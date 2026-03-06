@@ -74,7 +74,7 @@ export async function setupSkills(
   );
 
   const shouldConfigure = await prompter.confirm({
-    message: "Configure skills now? (recommended)",
+    message: "Configure skills now? (recommended) (现在配置技能吗？- 推荐)",
     initialValue: true,
   });
   if (!shouldConfigure) {
@@ -87,7 +87,7 @@ export async function setupSkills(
   let next: OpenClawConfig = cfg;
   if (installable.length > 0) {
     const toInstall = await prompter.multiselect({
-      message: "Install missing skill dependencies",
+      message: "Install missing skill dependencies (安装缺失的技能依赖项)",
       options: [
         {
           value: "__skip__",
@@ -122,7 +122,7 @@ export async function setupSkills(
         "Homebrew recommended",
       );
       const showBrewInstall = await prompter.confirm({
-        message: "Show Homebrew install command?",
+        message: "Show Homebrew install command? (显示 Homebrew 安装命令吗？)",
         initialValue: true,
       });
       if (showBrewInstall) {
@@ -141,7 +141,7 @@ export async function setupSkills(
     );
     if (needsNodeManagerPrompt) {
       const nodeManager = (await prompter.select({
-        message: "Preferred node manager for skill installs",
+        message: "Preferred node manager for skill installs (选择安装技能节点包的首选包管理器)",
         options: resolveNodeManagerOptions(),
       })) as "npm" | "pnpm" | "bun";
       next = {

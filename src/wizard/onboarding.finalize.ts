@@ -98,7 +98,7 @@ export async function finalizeOnboardingWizard(
     installDaemon = true;
   } else {
     installDaemon = await prompter.confirm({
-      message: "Install Gateway service (recommended)",
+      message: "Install Gateway service (recommended) (安装网关服务 - 推荐)",
       initialValue: true,
     });
   }
@@ -116,7 +116,7 @@ export async function finalizeOnboardingWizard(
       flow === "quickstart"
         ? DEFAULT_GATEWAY_DAEMON_RUNTIME
         : await prompter.select({
-            message: "Gateway service runtime",
+            message: "Gateway service runtime (网关服务运行时)",
             options: GATEWAY_DAEMON_RUNTIME_OPTIONS,
             initialValue: opts.daemonRuntime ?? DEFAULT_GATEWAY_DAEMON_RUNTIME,
           });
@@ -130,7 +130,7 @@ export async function finalizeOnboardingWizard(
     const loaded = await service.isLoaded({ env: process.env });
     if (loaded) {
       const action = await prompter.select({
-        message: "Gateway service already installed",
+        message: "Gateway service already installed (网关服务已安装)",
         options: [
           { value: "restart", label: "Restart" },
           { value: "reinstall", label: "Reinstall" },
@@ -359,7 +359,7 @@ export async function finalizeOnboardingWizard(
     );
 
     hatchChoice = await prompter.select({
-      message: "How do you want to hatch your bot?",
+      message: "How do you want to hatch your bot? (你想如何启动机器人？)",
       options: [
         { value: "tui", label: "Hatch in TUI (recommended)" },
         { value: "web", label: "Open the Web UI" },

@@ -236,7 +236,7 @@ export async function promptDefaultModel(
     !hasPreferredProvider && providers.length > 1 && models.length > PROVIDER_FILTER_THRESHOLD;
   if (shouldPromptProvider) {
     const selection = await params.prompter.select({
-      message: "Filter models by provider",
+      message: "Filter models by provider (按提供商筛选模型)",
       options: [
         { value: "*", label: "All providers" },
         ...providers.map((provider) => {
@@ -450,7 +450,7 @@ export async function promptModelAllowlist(params: {
     return { models: [] };
   }
   const confirmClear = await params.prompter.confirm({
-    message: "Clear the model allowlist? (shows all models)",
+    message: "Clear the model allowlist? (shows all models) (清空模型允许列表吗？这将显示所有模型)",
     initialValue: false,
   });
   if (!confirmClear) {

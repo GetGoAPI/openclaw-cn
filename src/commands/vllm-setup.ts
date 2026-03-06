@@ -18,18 +18,18 @@ export async function promptAndConfigureVllm(params: {
   agentDir?: string;
 }): Promise<{ config: OpenClawConfig; modelId: string; modelRef: string }> {
   const baseUrlRaw = await params.prompter.text({
-    message: "vLLM base URL",
+    message: "vLLM base URL (vLLM 基础 URL)",
     initialValue: VLLM_DEFAULT_BASE_URL,
     placeholder: VLLM_DEFAULT_BASE_URL,
     validate: (value) => (value?.trim() ? undefined : "Required"),
   });
   const apiKeyRaw = await params.prompter.text({
-    message: "vLLM API key",
+    message: "vLLM API key (vLLM API 密钥)",
     placeholder: "sk-... (or any non-empty string)",
     validate: (value) => (value?.trim() ? undefined : "Required"),
   });
   const modelIdRaw = await params.prompter.text({
-    message: "vLLM model",
+    message: "vLLM model (vLLM 模型)",
     placeholder: "meta-llama/Meta-Llama-3-8B-Instruct",
     validate: (value) => (value?.trim() ? undefined : "Required"),
   });

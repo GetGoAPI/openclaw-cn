@@ -237,7 +237,7 @@ async function maybeConfigureDmPolicies(params: {
   }
 
   const wants = await prompter.confirm({
-    message: "Configure DM access policies now? (default: pairing)",
+    message: "Configure DM access policies now? (default: pairing) (现在配置 DM 访问策略吗？默认：配对后可聊)",
     initialValue: false,
   });
   if (!wants) {
@@ -314,7 +314,7 @@ export async function setupChannels(
   const shouldConfigure = options?.skipConfirm
     ? true
     : await prompter.confirm({
-        message: "Configure chat channels now?",
+        message: "Configure chat channels now? (现在配置聊天频道吗？)",
         initialValue: true,
       });
   if (!shouldConfigure) {
@@ -680,7 +680,7 @@ export async function setupChannels(
   if (options?.quickstartDefaults) {
     const { entries } = getChannelEntries();
     const choice = (await prompter.select({
-      message: "Select channel (QuickStart)",
+      message: "Select channel (QuickStart) (选择频道 - 快速开始)",
       options: [
         ...buildSelectionOptions(entries),
         {
@@ -700,7 +700,7 @@ export async function setupChannels(
     while (true) {
       const { entries } = getChannelEntries();
       const choice = (await prompter.select({
-        message: "Select a channel",
+        message: "Select a channel (选择一个频道)",
         options: [
           ...buildSelectionOptions(entries),
           {

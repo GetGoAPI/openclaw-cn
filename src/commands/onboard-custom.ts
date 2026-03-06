@@ -388,7 +388,7 @@ async function promptBaseUrlAndKey(params: {
   initialBaseUrl?: string;
 }): Promise<{ baseUrl: string; apiKey?: SecretInput; resolvedApiKey: string }> {
   const baseUrlInput = await params.prompter.text({
-    message: "API Base URL",
+    message: "API Base URL (API 基础 URL)",
     initialValue: params.initialBaseUrl ?? DEFAULT_OLLAMA_BASE_URL,
     placeholder: "https://api.example.com/v1",
     validate: (val) => {
@@ -427,7 +427,7 @@ type CustomApiRetryChoice = "baseUrl" | "model" | "both";
 
 async function promptCustomApiRetryChoice(prompter: WizardPrompter): Promise<CustomApiRetryChoice> {
   return await prompter.select({
-    message: "What would you like to change?",
+    message: "What would you like to change? (你想修改什么？)",
     options: [
       { value: "baseUrl", label: "Change base URL" },
       { value: "model", label: "Change model" },
@@ -439,7 +439,7 @@ async function promptCustomApiRetryChoice(prompter: WizardPrompter): Promise<Cus
 async function promptCustomApiModelId(prompter: WizardPrompter): Promise<string> {
   return (
     await prompter.text({
-      message: "Model ID",
+      message: "Model ID (模型 ID)",
       placeholder: "e.g. llama3, claude-3-7-sonnet",
       validate: (val) => (val.trim() ? undefined : "Model ID is required"),
     })
@@ -687,7 +687,7 @@ export async function promptCustomApiConfig(params: {
   let resolvedApiKey = baseInput.resolvedApiKey;
 
   const compatibilityChoice = await prompter.select({
-    message: "Endpoint compatibility",
+    message: "Endpoint compatibility (端点兼容性)",
     options: COMPATIBILITY_OPTIONS.map((option) => ({
       value: option.value,
       label: option.label,
@@ -776,7 +776,7 @@ export async function promptCustomApiConfig(params: {
   const providers = config.models?.providers ?? {};
   const suggestedId = buildEndpointIdFromUrl(baseUrl);
   const providerIdInput = await prompter.text({
-    message: "Endpoint ID",
+    message: "Endpoint ID (端点 ID)",
     initialValue: suggestedId,
     placeholder: "custom",
     validate: (value) => {
@@ -788,7 +788,7 @@ export async function promptCustomApiConfig(params: {
     },
   });
   const aliasInput = await prompter.text({
-    message: "Model alias (optional)",
+    message: "Model alias (optional) (模型别名（可选）)",
     placeholder: "e.g. local, ollama",
     initialValue: "",
     validate: (value) => {

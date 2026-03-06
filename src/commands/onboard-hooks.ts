@@ -36,7 +36,7 @@ export async function setupInternalHooks(
   }
 
   const toEnable = await prompter.multiselect({
-    message: "Enable hooks?",
+    message: "Enable hooks? (启用钩子机制？)",
     options: [
       { value: "__skip__", label: "Skip for now" },
       ...eligibleHooks.map((hook) => ({
