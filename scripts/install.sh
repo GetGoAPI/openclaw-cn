@@ -1442,6 +1442,11 @@ install_node() {
 
         ui_info "Installing Node.js via NodeSource"
         if command -v apt-get &> /dev/null; then
+            if is_root; then
+                run_quiet_step "Cleaning old conflicting packages" apt-get remove --purge -y nodejs libnode-dev npm
+            else
+                run_quiet_step "Cleaning old conflicting packages" sudo apt-get remove --purge -y nodejs libnode-dev npm
+            fi
             local tmp
             tmp="$(mktempfile)"
             download_file "https://deb.nodesource.com/setup_22.x" "$tmp"
