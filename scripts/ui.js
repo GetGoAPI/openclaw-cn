@@ -46,9 +46,9 @@ function which(cmd) {
 }
 
 function resolveRunner() {
-  const pnpm = which("pnpm");
-  if (pnpm) {
-    return { cmd: pnpm, kind: "pnpm" };
+  const npm = which("npm");
+  if (npm) {
+    return { cmd: npm, kind: "npm" };
   }
   return null;
 }
@@ -168,7 +168,7 @@ export function main(argv = process.argv.slice(2)) {
 
   const runner = resolveRunner();
   if (!runner) {
-    process.stderr.write("Missing UI runner: install pnpm, then retry.\n");
+    process.stderr.write("Missing UI runner: install npm, then retry.\n");
     process.exit(1);
   }
 
@@ -184,9 +184,8 @@ export function main(argv = process.argv.slice(2)) {
   }
 
   if (!depsInstalled(action === "test" ? "test" : "build")) {
-    const installEnv =
-      action === "build" ? { ...process.env, NODE_ENV: "production" } : process.env;
-    const installArgs = action === "build" ? ["install", "--prod"] : ["install"];
+    const installEnv = process.env;
+    const installArgs = ["install"];
     runSync(runner.cmd, installArgs, installEnv);
   }
 

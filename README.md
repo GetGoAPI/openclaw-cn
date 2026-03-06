@@ -18,17 +18,17 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="MIT License"></a>
 </p>
 
-**OpenClaw** is a _personal AI assistant_ you run on your own devices.
-It answers you on the channels you already use (WhatsApp, Telegram, Slack, Discord, Google Chat, Signal, iMessage, BlueBubbles, IRC, Microsoft Teams, Matrix, Feishu, LINE, Mattermost, Nextcloud Talk, Nostr, Synology Chat, Tlon, Twitch, Zalo, Zalo Personal, WebChat). It can speak and listen on macOS/iOS/Android, and can render a live Canvas you control. The Gateway is just the control plane — the product is the assistant.
+**OpenClaw** 是一个可以在您自己的设备上运行的_个人 AI 助手_。
+它可以在您已经使用的聊天软件和平台上回答您（WhatsApp, Telegram, Slack, Discord, Google Chat, Signal, iMessage, BlueBubbles, IRC, Microsoft Teams, Matrix, Feishu (飞书), LINE, Mattermost, Nextcloud Talk, Nostr, Synology Chat, Tlon, Twitch, Zalo, Zalo Personal, Web网页版）。它可以在 macOS/iOS/Android 上进行听和说，并且可以渲染一个由您控制和交互的实时画板 (Canvas)。Gateway（网关）只是其控制面——真正的产品是这位 AI 助手本身。
 
-If you want a personal, single-user assistant that feels local, fast, and always-on, this is it.
+如果您想要一个感觉像是本地运行的、快速响应、并且永远在线的个人专属单人助手，这就是您的最佳选择。
 
-[Website](https://openclaw.ai) · [Docs](https://docs.openclaw.ai) · [Vision](VISION.md) · [DeepWiki](https://deepwiki.com/openclaw/openclaw) · [Getting Started](https://docs.openclaw.ai/start/getting-started) · [Updating](https://docs.openclaw.ai/install/updating) · [Showcase](https://docs.openclaw.ai/start/showcase) · [FAQ](https://docs.openclaw.ai/help/faq) · [Wizard](https://docs.openclaw.ai/start/wizard) · [Nix](https://github.com/openclaw/nix-openclaw) · [Docker](https://docs.openclaw.ai/install/docker) · [Discord](https://discord.gg/clawd)
+[官方网站](https://openclaw.ai) · [官方文档](https://docs.openclaw.ai) · [项目愿景](VISION.md) · [DeepWiki](https://deepwiki.com/openclaw/openclaw) · [快速开始](https://docs.openclaw.ai/start/getting-started) · [更新指南](https://docs.openclaw.ai/install/updating) · [展示案例](https://docs.openclaw.ai/start/showcase) · [FAQ/常见问题](https://docs.openclaw.ai/help/faq) · [自动向导](https://docs.openclaw.ai/start/wizard) · [Nix 支持](https://github.com/openclaw/nix-openclaw) · [Docker 部署](https://docs.openclaw.ai/install/docker) · [Discord 社区](https://discord.gg/clawd)
 
-Preferred setup: run the onboarding wizard (`openclaw onboard`) in your terminal.
-The wizard guides you step by step through setting up the gateway, workspace, channels, and skills. The CLI wizard is the recommended path and works on **macOS, Linux, and Windows (via WSL2; strongly recommended)**.
-Works with npm, pnpm, or bun.
-New install? Start here: [Getting started](https://docs.openclaw.ai/start/getting-started)
+推荐的设置方式：在您的终端中运行首次配置向导 (`openclaw onboard`)。
+该向导将手把手引导您设置网关、工作区、连接频道和各项功能技能。这是强烈推荐的配置方式，并且支持 **macOS、Linux、以及 Windows（强烈建议通过 WSL2 运行）**。
+兼容使用 npm、pnpm 或 bun 启动。
+如果您是首次安装？请从这里开始：[Getting started (官方英文起步文档)](https://docs.openclaw.ai/start/getting-started)
 
 ## Sponsors
 
@@ -36,288 +36,294 @@ New install? Start here: [Getting started](https://docs.openclaw.ai/start/gettin
 | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------- |
 | [![OpenAI](docs/assets/sponsors/openai.svg)](https://openai.com/) | [![Vercel](docs/assets/sponsors/vercel.svg)](https://vercel.com/) | [![Blacksmith](docs/assets/sponsors/blacksmith.svg)](https://blacksmith.sh/) | [![Convex](docs/assets/sponsors/convex.svg)](https://www.convex.dev/) |
 
-**Subscriptions (OAuth):**
+**支持的订阅与接口 (OAuth 登录或 API 密钥):**
 
-- **[OpenAI](https://openai.com/)** (ChatGPT/Codex)
+- **[OpenAI](https://openai.com/)** (支持 ChatGPT/Codex)
 
-Model note: while many providers/models are supported, for the best experience and lower prompt-injection risk use the strongest latest-generation model available to you. See [Onboarding](https://docs.openclaw.ai/start/onboarding).
+> **大模型使用提示：** 尽管本程序支持大量第三方提供商和不同的大模型，但是为了获得最佳的交互体验、同时降低被提示词注入 (prompt-injection) 的风险，请务必使用您能获取到的**最强/最新一代大模型**。更多详情请参阅 [Onboarding 初始化指南](https://docs.openclaw.ai/start/onboarding)。
 
-## Models (selection + auth)
+## 支持的大模型 (选择与鉴权配置)
 
-- Models config + CLI: [Models](https://docs.openclaw.ai/concepts/models)
-- Auth profile rotation (OAuth vs API keys) + fallbacks: [Model failover](https://docs.openclaw.ai/concepts/model-failover)
+- 大模型配置与命令行: [模型概念](https://docs.openclaw.ai/concepts/models)
+- 鉴权配置轮换策略 (如 OAuth 与 API keys 的选择) 以及故障转移: [模型容灾与备份配置 (Model failover)](https://docs.openclaw.ai/concepts/model-failover)
 
-## Install (recommended)
+## 一键安装 (强烈推荐)
 
-Runtime: **Node ≥22**.
+运行环境要求：**Node.js 版本 ≥22**。
 
+**对于 Linux / macOS:**
 ```bash
-npm install -g openclaw@latest
-# or: pnpm add -g openclaw@latest
-
-openclaw onboard --install-daemon
+curl -fsSL https://raw.githubusercontent.com/GetGoAPI/openclaw-cn/main/scripts/install.sh | bash
 ```
 
-The wizard installs the Gateway daemon (launchd/systemd user service) so it stays running.
+**对于 Windows (PowerShell):**
+```powershell
+iwr https://raw.githubusercontent.com/GetGoAPI/openclaw-cn/main/scripts/install.ps1 -useb | iex
+```
 
-## Quick start (TL;DR)
+> **注意：** 安装向导会自动安装并配置好 OpenClaw 的守护进程 (launchd/systemd 用户级服务)，确保它可以随时在后台运行。
 
-Runtime: **Node ≥22**.
+## 快速上手使用演示 (TL;DR)
 
-Full beginner guide (auth, pairing, channels): [Getting started](https://docs.openclaw.ai/start/getting-started)
+运行环境要求：**Node.js 版本 ≥22**。
+
+为初学者准备的完整向导（涵盖账户认证、设备配对、频道连接配置等）: [点此查看起步文章](https://docs.openclaw.ai/start/getting-started)。
 
 ```bash
+# 执行首次向导（会自动包含安装守护进程）
 openclaw onboard --install-daemon
 
+# 启动 Gateway 网关（手动模式）
 openclaw gateway --port 18789 --verbose
 
-# Send a message
-openclaw message send --to +1234567890 --message "Hello from OpenClaw"
+# 测试发送一条消息
+openclaw message send --to +1234567890 --message "Hello from OpenClaw (中文开源版)"
 
-# Talk to the assistant (optionally deliver back to any connected channel: WhatsApp/Telegram/Slack/Discord/Google Chat/Signal/iMessage/BlueBubbles/IRC/Microsoft Teams/Matrix/Feishu/LINE/Mattermost/Nextcloud Talk/Nostr/Synology Chat/Tlon/Twitch/Zalo/Zalo Personal/WebChat)
-openclaw agent --message "Ship checklist" --thinking high
+# 与您的专属 AI 助手对话 (在后台，助手还能回复给绑定的任何社交频道比如 Slack/Telegram/Discord/飞书/微信网页版等)
+openclaw agent --message "帮我出具一份今日的工作清单" --thinking high
 ```
 
-Upgrading? [Updating guide](https://docs.openclaw.ai/install/updating) (and run `openclaw doctor`).
+想要升级版本？查阅 [Updating guide (升级指南文档)](https://docs.openclaw.ai/install/updating) （并且随手运行一下修复命令 `openclaw doctor`）。
 
-## Development channels
+## 更新与开发分支通道
 
-- **stable**: tagged releases (`vYYYY.M.D` or `vYYYY.M.D-<patch>`), npm dist-tag `latest`.
-- **beta**: prerelease tags (`vYYYY.M.D-beta.N`), npm dist-tag `beta` (macOS app may be missing).
-- **dev**: moving head of `main`, npm dist-tag `dev` (when published).
+- **stable (稳定版)**: 加盖发行版标签的版本 (`vYYYY.M.D` 或者是 `vYYYY.M.D-<patch>`)，在 npm 上为 `latest` 分发标签。
+- **beta (测试版)**: 预发布测试标签 (`vYYYY.M.D-beta.N`)，在 npm 上为 `beta` 分发标签。
+- **dev (开发版)**: `main` 主分支上的最新变动代码跟随，在 npm 上为 `dev` 标签。
 
-Switch channels (git + npm): `openclaw update --channel stable|beta|dev`.
-Details: [Development channels](https://docs.openclaw.ai/install/development-channels).
+如何在不同通道间切换？使用自带指令: `openclaw update --channel stable|beta|dev`。
+详细信息查阅这里: [开发分支通道说明](https://docs.openclaw.ai/install/development-channels)。
 
-## From source (development)
+## 从源码构建运行 (适用于开发)
 
-Prefer `pnpm` for builds from source. Bun is optional for running TypeScript directly.
+如果选择从源码构建，我们推荐使用 `pnpm`。`Bun` 则是可选的，如果直接运行 TypeScript 则可使用它。
 
 ```bash
 git clone https://github.com/openclaw/openclaw.git
 cd openclaw
 
-pnpm install
-pnpm ui:build # auto-installs UI deps on first run
-pnpm build
+npm install
+npm run ui:build # 首次运行时自动安装 UI 依赖并构建
+npm run build
 
-pnpm openclaw onboard --install-daemon
+# 自动引导并配置守护进程
+npm run openclaw onboard --install-daemon
 
-# Dev loop (auto-reload on TS changes)
-pnpm gateway:watch
+# 开发热重载模式 (保存 TS 文件后立即生效)
+npm run gateway:watch
 ```
 
-Note: `pnpm openclaw ...` runs TypeScript directly (via `tsx`). `pnpm build` produces `dist/` for running via Node / the packaged `openclaw` binary.
+注: 原始版本中 `pnpm openclaw ...` 是通过 `tsx` 快速执行 TypeScript。目前定制版使用 `npm build` 同样会在 `dist/` 目录下生成产物，并可通过 Node 或打包出的 `openclaw` 二进制文件运行。
 
-## Security defaults (DM access)
+## 默认安全策略 (私聊消息权限)
 
-OpenClaw connects to real messaging surfaces. Treat inbound DMs as **untrusted input**.
+OpenClaw 默认直接与现实世界的各大聊天系统交互。请永远将传入的私聊信息 (DMs) 视作**不受信任的输入**。
 
-Full security guide: [Security](https://docs.openclaw.ai/gateway/security)
+完整的配置安全指南: [安全文档 (Security)](https://docs.openclaw.ai/gateway/security)
 
-Default behavior on Telegram/WhatsApp/Signal/iMessage/Microsoft Teams/Discord/Google Chat/Slack:
+在 Telegram / WhatsApp / Signal / iMessage / Microsoft Teams / Discord / Google Chat / Slack 中的默认行为是：
 
-- **DM pairing** (`dmPolicy="pairing"` / `channels.discord.dmPolicy="pairing"` / `channels.slack.dmPolicy="pairing"`; legacy: `channels.discord.dm.policy`, `channels.slack.dm.policy`): unknown senders receive a short pairing code and the bot does not process their message.
-- Approve with: `openclaw pairing approve <channel> <code>` (then the sender is added to a local allowlist store).
-- Public inbound DMs require an explicit opt-in: set `dmPolicy="open"` and include `"*"` in the channel allowlist (`allowFrom` / `channels.discord.allowFrom` / `channels.slack.allowFrom`; legacy: `channels.discord.dm.allowFrom`, `channels.slack.dm.allowFrom`).
+- **私聊配对模式 (DM pairing)** (`dmPolicy="pairing"` / `channels.discord.dmPolicy="pairing"` / `channels.slack.dmPolicy="pairing"`；传统配置 `channels.discord.dm.policy`, `channels.slack.dm.policy`): 陌生发件人首次私聊时会收到一个简短的数字配对码，而此时机器人**不会**处理他们发送的消息内容。
+- 使用终端命令批准配对请求: `openclaw pairing approve <渠道名> <配对码>` (系统之后会将此发件人加入本地的白名单库)。
+- 如果您允许任何人都可以向它发送私聊请求（公共模式），需显式设置: 设定 `dmPolicy="open"` 并确保在频道白名单 (`allowFrom` / `channels.discord.allowFrom` 等) 里包含通配符 `"*"`。
 
-Run `openclaw doctor` to surface risky/misconfigured DM policies.
+运行 `openclaw doctor` 可随时检测并暴露潜在的风险和错误的 DM 私聊访问策略。
 
-## Highlights
+## 核心亮点
 
-- **[Local-first Gateway](https://docs.openclaw.ai/gateway)** — single control plane for sessions, channels, tools, and events.
-- **[Multi-channel inbox](https://docs.openclaw.ai/channels)** — WhatsApp, Telegram, Slack, Discord, Google Chat, Signal, BlueBubbles (iMessage), iMessage (legacy), IRC, Microsoft Teams, Matrix, Feishu, LINE, Mattermost, Nextcloud Talk, Nostr, Synology Chat, Tlon, Twitch, Zalo, Zalo Personal, WebChat, macOS, iOS/Android.
-- **[Multi-agent routing](https://docs.openclaw.ai/gateway/configuration)** — route inbound channels/accounts/peers to isolated agents (workspaces + per-agent sessions).
-- **[Voice Wake](https://docs.openclaw.ai/nodes/voicewake) + [Talk Mode](https://docs.openclaw.ai/nodes/talk)** — wake words on macOS/iOS and continuous voice on Android (ElevenLabs + system TTS fallback).
-- **[Live Canvas](https://docs.openclaw.ai/platforms/mac/canvas)** — agent-driven visual workspace with [A2UI](https://docs.openclaw.ai/platforms/mac/canvas#canvas-a2ui).
-- **[First-class tools](https://docs.openclaw.ai/tools)** — browser, canvas, nodes, cron, sessions, and Discord/Slack actions.
-- **[Companion apps](https://docs.openclaw.ai/platforms/macos)** — macOS menu bar app + iOS/Android [nodes](https://docs.openclaw.ai/nodes).
-- **[Onboarding](https://docs.openclaw.ai/start/wizard) + [skills](https://docs.openclaw.ai/tools/skills)** — wizard-driven setup with bundled/managed/workspace skills.
+- **[Local-first 本地优先的网关 (Gateway)](https://docs.openclaw.ai/gateway)** — 一站式集中控制会话 (sessions)、频道路由 (channels)、工具调用机制 (tools) 及各项事件机制。
+- **[多渠道信箱合一](https://docs.openclaw.ai/channels)** — 囊括 WhatsApp, Telegram, Slack, Discord, Google Chat, Signal, BlueBubbles (iMessage), legacy iMessage, IRC, Microsoft Teams, Matrix, 飞书 (Feishu), LINE, Mattermost, Nextcloud Talk, Nostr, Synology Chat, Tlon, Twitch, Zalo以及网页版聊天等；支持 macOS、iOS 和 Android 控制。
+- **[多智能体路由分发 (Multi-agent routing)](https://docs.openclaw.ai/gateway/configuration)** — 可以将不同渠道 / 系统账号转接到独立隔绝的不同大模型智能体当中。
+- **[语音唤醒支持 (Voice Wake)](https://docs.openclaw.ai/nodes/voicewake) + [交谈模式 (Talk Mode)](https://docs.openclaw.ai/nodes/talk)** — 在 macOS 上和 iOS 上提供特定语音唤醒，并在 Android 上提供连续语音对话 (底层使用 ElevenLabs 或系统原生的 TTS)。
+- **[交互式实时画板 (Live Canvas)](https://docs.openclaw.ai/platforms/mac/canvas)** — 提供给 AI 直接驱动与调整的交互式 Web 空间，内置了原生 [A2UI](https://docs.openclaw.ai/platforms/mac/canvas#canvas-a2ui)。
+- **[强大的内建实用工具箱](https://docs.openclaw.ai/tools)** — 含浏览器操控、画板、节点、CRON 定时任务、历史记录截取和 Discord/Slack 自带的系统动作。
+- **[多终端配套生态 App](https://docs.openclaw.ai/platforms/macos)** — 比如 macOS 常驻菜单栏的监控程序以及支持移动端特性的 iOS / Android 版本 [节点应用](https://docs.openclaw.ai/nodes)。
+- **[自动配置项向导](https://docs.openclaw.ai/start/wizard) + [技能扩展库](https://docs.openclaw.ai/tools/skills)** — 通过自带自动化向导快速完成捆绑技能环境构建及管理。
 
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=openclaw/openclaw&type=date&legend=top-left)](https://www.star-history.com/#openclaw/openclaw&type=date&legend=top-left)
 
-## Everything we built so far
+## 至今为止我们已构建的内容大纲
 
-### Core platform
+### 核心引擎与后端底层
 
-- [Gateway WS control plane](https://docs.openclaw.ai/gateway) with sessions, presence, config, cron, webhooks, [Control UI](https://docs.openclaw.ai/web), and [Canvas host](https://docs.openclaw.ai/platforms/mac/canvas#canvas-a2ui).
-- [CLI surface](https://docs.openclaw.ai/tools/agent-send): gateway, agent, send, [wizard](https://docs.openclaw.ai/start/wizard), and [doctor](https://docs.openclaw.ai/gateway/doctor).
-- [Pi agent runtime](https://docs.openclaw.ai/concepts/agent) in RPC mode with tool streaming and block streaming.
-- [Session model](https://docs.openclaw.ai/concepts/session): `main` for direct chats, group isolation, activation modes, queue modes, reply-back. Group rules: [Groups](https://docs.openclaw.ai/channels/groups).
-- [Media pipeline](https://docs.openclaw.ai/nodes/images): images/audio/video, transcription hooks, size caps, temp file lifecycle. Audio details: [Audio](https://docs.openclaw.ai/nodes/audio).
+- [网关 WebSockets 核心层](https://docs.openclaw.ai/gateway)：具备会话维护、设备出勤机制、后台轮询以及 Webhook 机制，附带 [专属 Web 桌面版后台](https://docs.openclaw.ai/web) 与 [画布主机引擎 (Canvas Host)](https://docs.openclaw.ai/platforms/mac/canvas#canvas-a2ui)。
+- [CLI 丰富指令库](https://docs.openclaw.ai/tools/agent-send)：包括 gateway (服务), agent (智能体), send (转发)，以及 [配置向导程序 (wizard)](https://docs.openclaw.ai/start/wizard) 和 [环境体检诊断脚本 (doctor)](https://docs.openclaw.ai/gateway/doctor)。
+- [Agent 运行时 (Runtime)](https://docs.openclaw.ai/concepts/agent)：带有工具流支持并在 RPC 远程调用模式下单步执行机制。
+- [多路会话隔离模型 (Session model)](https://docs.openclaw.ai/concepts/session)：独立的 `main` 直接对话处理主栈，具备激活锁队列以及重定向响应的功能。有关群聊独立路由细节参看：[群组通信策略 (Groups)](https://docs.openclaw.ai/channels/groups)。
+- [重媒体渲染管道](https://docs.openclaw.ai/nodes/images)：涉及 图片/音频/视频的处理，甚至包括转录 Hook 操作和容量限制清退。更多参见: [音频流技术细节 (Audio)](https://docs.openclaw.ai/nodes/audio)。
 
-### Channels
+### 第三方聊天信使客户端覆盖 (Channels)
 
-- [Channels](https://docs.openclaw.ai/channels): [WhatsApp](https://docs.openclaw.ai/channels/whatsapp) (Baileys), [Telegram](https://docs.openclaw.ai/channels/telegram) (grammY), [Slack](https://docs.openclaw.ai/channels/slack) (Bolt), [Discord](https://docs.openclaw.ai/channels/discord) (discord.js), [Google Chat](https://docs.openclaw.ai/channels/googlechat) (Chat API), [Signal](https://docs.openclaw.ai/channels/signal) (signal-cli), [BlueBubbles](https://docs.openclaw.ai/channels/bluebubbles) (iMessage, recommended), [iMessage](https://docs.openclaw.ai/channels/imessage) (legacy imsg), [IRC](https://docs.openclaw.ai/channels/irc), [Microsoft Teams](https://docs.openclaw.ai/channels/msteams), [Matrix](https://docs.openclaw.ai/channels/matrix), [Feishu](https://docs.openclaw.ai/channels/feishu), [LINE](https://docs.openclaw.ai/channels/line), [Mattermost](https://docs.openclaw.ai/channels/mattermost), [Nextcloud Talk](https://docs.openclaw.ai/channels/nextcloud-talk), [Nostr](https://docs.openclaw.ai/channels/nostr), [Synology Chat](https://docs.openclaw.ai/channels/synology-chat), [Tlon](https://docs.openclaw.ai/channels/tlon), [Twitch](https://docs.openclaw.ai/channels/twitch), [Zalo](https://docs.openclaw.ai/channels/zalo), [Zalo Personal](https://docs.openclaw.ai/channels/zalouser), [WebChat](https://docs.openclaw.ai/web/webchat).
-- [Group routing](https://docs.openclaw.ai/channels/group-messages): mention gating, reply tags, per-channel chunking and routing. Channel rules: [Channels](https://docs.openclaw.ai/channels).
+- [所有连接频道](https://docs.openclaw.ai/channels): [WhatsApp](https://docs.openclaw.ai/channels/whatsapp) (Baileys), [Telegram](https://docs.openclaw.ai/channels/telegram) (grammY), [Slack](https://docs.openclaw.ai/channels/slack) (Bolt), [Discord](https://docs.openclaw.ai/channels/discord) (discord.js), [Google Chat](https://docs.openclaw.ai/channels/googlechat) (Chat API), [Signal](https://docs.openclaw.ai/channels/signal) (signal-cli), [BlueBubbles](https://docs.openclaw.ai/channels/bluebubbles) (强烈推荐的平替 iMessage方案), [iMessage](https://docs.openclaw.ai/channels/imessage) (早期 imsg 接口), [IRC](https://docs.openclaw.ai/channels/irc), [Microsoft Teams](https://docs.openclaw.ai/channels/msteams), [Matrix](https://docs.openclaw.ai/channels/matrix), [Feishu (飞书)](https://docs.openclaw.ai/channels/feishu), [LINE](https://docs.openclaw.ai/channels/line), [Mattermost](https://docs.openclaw.ai/channels/mattermost), [Nextcloud Talk](https://docs.openclaw.ai/channels/nextcloud-talk), [Nostr](https://docs.openclaw.ai/channels/nostr), [Synology Chat](https://docs.openclaw.ai/channels/synology-chat), [Tlon](https://docs.openclaw.ai/channels/tlon), [Twitch](https://docs.openclaw.ai/channels/twitch), [Zalo](https://docs.openclaw.ai/channels/zalo), [Zalo Personal](https://docs.openclaw.ai/channels/zalouser), [WebChat (网页版专属对话)](https://docs.openclaw.ai/web/webchat)。
+- [自动群聊响应策略](https://docs.openclaw.ai/channels/group-messages): 特殊权限、被 `@` 引用以及自定义截断路由设置。策略详见：[Channels](https://docs.openclaw.ai/channels)。
 
-### Apps + nodes
+### Apps 生态与衍生外围节点
 
-- [macOS app](https://docs.openclaw.ai/platforms/macos): menu bar control plane, [Voice Wake](https://docs.openclaw.ai/nodes/voicewake)/PTT, [Talk Mode](https://docs.openclaw.ai/nodes/talk) overlay, [WebChat](https://docs.openclaw.ai/web/webchat), debug tools, [remote gateway](https://docs.openclaw.ai/gateway/remote) control.
-- [iOS node](https://docs.openclaw.ai/platforms/ios): [Canvas](https://docs.openclaw.ai/platforms/mac/canvas), [Voice Wake](https://docs.openclaw.ai/nodes/voicewake), [Talk Mode](https://docs.openclaw.ai/nodes/talk), camera, screen recording, Bonjour + device pairing.
-- [Android node](https://docs.openclaw.ai/platforms/android): Connect tab (setup code/manual), chat sessions, voice tab, [Canvas](https://docs.openclaw.ai/platforms/mac/canvas), camera/screen recording, and Android device commands (notifications/location/SMS/photos/contacts/calendar/motion/app update).
-- [macOS node mode](https://docs.openclaw.ai/nodes): system.run/notify + canvas/camera exposure.
+- [macOS 菜单状态栏独立应用](https://docs.openclaw.ai/platforms/macos): 原生系统级别托盘，融合 [后台呼入唤醒 (Voice Wake)](https://docs.openclaw.ai/nodes/voicewake) / 和语音一键交谈支持 [Talk Mode](https://docs.openclaw.ai/nodes/talk)，还可以利用 SSH 端口对网关做 [远程管控连接配置](https://docs.openclaw.ai/gateway/remote)。
+- [iOS 平台联动节点](https://docs.openclaw.ai/platforms/ios): 获取 [Canvas 环境同步](https://docs.openclaw.ai/platforms/mac/canvas)，摄像头录制甚至屏幕共享，通过 Bonjour 和蓝牙配对寻找局域网网关。
+- [Android 客户端节点](https://docs.openclaw.ai/platforms/android): 连接面板（支持代码与手工输入），集成了对话栏、语音栏、[画板展示](https://docs.openclaw.ai/platforms/mac/canvas)，同时深度调用安卓底层接口（支持安卓设备的锁屏通知获取 / 位置追踪获取 / 收发 SMS 短信 / 手机相册遍历与读取 / 日历与运动状态侦测功能调用）。
+- [专属 macOS 工作流处理节点模式 (Node mode)](https://docs.openclaw.ai/nodes): `system.run` 系统底层执行权限调用以及 `system.notify` 原生通知回调等。
 
-### Tools + automation
+### 工具和自动化 (Tools + automation)
 
-- [Browser control](https://docs.openclaw.ai/tools/browser): dedicated openclaw Chrome/Chromium, snapshots, actions, uploads, profiles.
-- [Canvas](https://docs.openclaw.ai/platforms/mac/canvas): [A2UI](https://docs.openclaw.ai/platforms/mac/canvas#canvas-a2ui) push/reset, eval, snapshot.
-- [Nodes](https://docs.openclaw.ai/nodes): camera snap/clip, screen record, [location.get](https://docs.openclaw.ai/nodes/location-command), notifications.
-- [Cron + wakeups](https://docs.openclaw.ai/automation/cron-jobs); [webhooks](https://docs.openclaw.ai/automation/webhook); [Gmail Pub/Sub](https://docs.openclaw.ai/automation/gmail-pubsub).
-- [Skills platform](https://docs.openclaw.ai/tools/skills): bundled, managed, and workspace skills with install gating + UI.
+- [AI 全自动无头浏览器浏览与截取](https://docs.openclaw.ai/tools/browser): 内置了专门配置的开源 chromium / Chrome 驱动抓取工具，用于分析 URL 内容或者模拟点击登录。
+- [交互式前端画布控制 (Canvas)](https://docs.openclaw.ai/platforms/mac/canvas): 包含了最新的 [A2UI](https://docs.openclaw.ai/platforms/mac/canvas#canvas-a2ui) 代码下发和快速评测更新机制。
+- [外挂硬件监控器和摄像头节点操作 (Nodes)](https://docs.openclaw.ai/nodes)。
+- [预定的定时触发任务 (Cron) 及各类唤醒机制](https://docs.openclaw.ai/automation/cron-jobs)；甚至外链的 [webhooks](https://docs.openclaw.ai/automation/webhook)，或者触发特定的 [Gmail 邮件收发展阅与 Pub/Sub](https://docs.openclaw.ai/automation/gmail-pubsub)。
+- [独立的开源工具集集市技能市场 (Skills platform)](https://docs.openclaw.ai/tools/skills): 通过 UI 或终端即时拉取外部由其他作者贡献开发编写的代码技能包，扩充 AI 知识体系边界。
 
-### Runtime + safety
+### 程序内部逻辑安全调度
 
-- [Channel routing](https://docs.openclaw.ai/channels/channel-routing), [retry policy](https://docs.openclaw.ai/concepts/retry), and [streaming/chunking](https://docs.openclaw.ai/concepts/streaming).
-- [Presence](https://docs.openclaw.ai/concepts/presence), [typing indicators](https://docs.openclaw.ai/concepts/typing-indicators), and [usage tracking](https://docs.openclaw.ai/concepts/usage-tracking).
-- [Models](https://docs.openclaw.ai/concepts/models), [model failover](https://docs.openclaw.ai/concepts/model-failover), and [session pruning](https://docs.openclaw.ai/concepts/session-pruning).
-- [Security](https://docs.openclaw.ai/gateway/security) and [troubleshooting](https://docs.openclaw.ai/channels/troubleshooting).
+- [内部频道流式传输速率控制和分包算法](https://docs.openclaw.ai/concepts/streaming)。
+- [各大聊天室输入中指示器打字回调跟踪](https://docs.openclaw.ai/concepts/typing-indicators) 与 [全节点和 token 使用耗费追踪预警](https://docs.openclaw.ai/concepts/usage-tracking)。
+- [跨平台的长会话上下文信息状态自我剪枝 (Session pruning)](https://docs.openclaw.ai/concepts/session-pruning)。
+- [针对故障错误和异常信息的系统排障与异常诊断记录分析](https://docs.openclaw.ai/channels/troubleshooting)。
 
-### Ops + packaging
+### 运维托管与打包环境 (Ops + packaging)
 
-- [Control UI](https://docs.openclaw.ai/web) + [WebChat](https://docs.openclaw.ai/web/webchat) served directly from the Gateway.
-- [Tailscale Serve/Funnel](https://docs.openclaw.ai/gateway/tailscale) or [SSH tunnels](https://docs.openclaw.ai/gateway/remote) with token/password auth.
-- [Nix mode](https://docs.openclaw.ai/install/nix) for declarative config; [Docker](https://docs.openclaw.ai/install/docker)-based installs.
-- [Doctor](https://docs.openclaw.ai/gateway/doctor) migrations, [logging](https://docs.openclaw.ai/logging).
+- [Control UI](https://docs.openclaw.ai/web) 和 [网页版聊天 (WebChat)](https://docs.openclaw.ai/web/webchat) 可以直接从网关服务运行提供访问。
+- 支持基于 [Tailscale Serve/Funnel](https://docs.openclaw.ai/gateway/tailscale) 或 [SSH 隧道](https://docs.openclaw.ai/gateway/remote) 的远程凭证访问管理。
+- [Nix 原生模式支持](https://docs.openclaw.ai/install/nix) 用于声明式系统配置安装；也可通过 [Docker 容器](https://docs.openclaw.ai/install/docker) 部署。
+- [Doctor 一键自检诊断](https://docs.openclaw.ai/gateway/doctor) 解决配置迁移，丰富的 [日志支持](https://docs.openclaw.ai/logging)。
 
-## How it works (short)
+## 简明工作原理大纲
 
 ```
-WhatsApp / Telegram / Slack / Discord / Google Chat / Signal / iMessage / BlueBubbles / IRC / Microsoft Teams / Matrix / Feishu / LINE / Mattermost / Nextcloud Talk / Nostr / Synology Chat / Tlon / Twitch / Zalo / Zalo Personal / WebChat
+WhatsApp / Telegram / Slack / Discord / Google Chat / Signal / iMessage / BlueBubbles / IRC / Microsoft Teams / Matrix / Feishu / LINE / Mattermost / Nextcloud Talk / Nostr / Synology Chat / Tlon / Twitch / Zalo / Zalo Personal / Web 网页版聊天
                │
                ▼
 ┌───────────────────────────────┐
-│            Gateway            │
-│       (control plane)         │
+│       Gateway (主网关)        │
+│    (系统控制面 Control Plane) │
 │     ws://127.0.0.1:18789      │
 └──────────────┬────────────────┘
                │
-               ├─ Pi agent (RPC)
-               ├─ CLI (openclaw …)
-               ├─ WebChat UI
-               ├─ macOS app
-               └─ iOS / Android nodes
+               ├─ Pi 智能体核心代理 (基于 RPC 通信)
+               ├─ CLI 终端命令行 (openclaw …)
+               ├─ WebChat 前端 UI 界面
+               ├─ macOS 原生系统应用
+               └─ iOS / Android 移动端节点
 ```
 
-## Key subsystems
+## 关键底层子系统
 
-- **[Gateway WebSocket network](https://docs.openclaw.ai/concepts/architecture)** — single WS control plane for clients, tools, and events (plus ops: [Gateway runbook](https://docs.openclaw.ai/gateway)).
-- **[Tailscale exposure](https://docs.openclaw.ai/gateway/tailscale)** — Serve/Funnel for the Gateway dashboard + WS (remote access: [Remote](https://docs.openclaw.ai/gateway/remote)).
-- **[Browser control](https://docs.openclaw.ai/tools/browser)** — openclaw‑managed Chrome/Chromium with CDP control.
-- **[Canvas + A2UI](https://docs.openclaw.ai/platforms/mac/canvas)** — agent‑driven visual workspace (A2UI host: [Canvas/A2UI](https://docs.openclaw.ai/platforms/mac/canvas#canvas-a2ui)).
-- **[Voice Wake](https://docs.openclaw.ai/nodes/voicewake) + [Talk Mode](https://docs.openclaw.ai/nodes/talk)** — wake words on macOS/iOS plus continuous voice on Android.
-- **[Nodes](https://docs.openclaw.ai/nodes)** — Canvas, camera snap/clip, screen record, `location.get`, notifications, plus macOS‑only `system.run`/`system.notify`.
+- **[Gateway WebSocket 网络协议](https://docs.openclaw.ai/concepts/architecture)** — 统一所有客户端、工具流和事件分发的单一 WebSocket 控制平面（包含操作指南：[Gateway runbook](https://docs.openclaw.ai/gateway)）。
+- **[Tailscale 内网穿透暴露](https://docs.openclaw.ai/gateway/tailscale)** — 利用内置的 Serve/Funnel 将后台和 WS 通讯穿透暴露出公网（远程连接：[Remote](https://docs.openclaw.ai/gateway/remote)）。
+- **[自动化无头浏览器](https://docs.openclaw.ai/tools/browser)** — 完全由 OpenClaw 管理、支持 CDP(Chrome DevTools Protocol) 指令控制的专用 Chromium。
+- **[交互画布模式 (Canvas) 及 A2UI](https://docs.openclaw.ai/platforms/mac/canvas)** — 以智能体 AI 为驱动生成的动态交互式视觉工作区（A2UI 宿主机细节：[Canvas/A2UI](https://docs.openclaw.ai/platforms/mac/canvas#canvas-a2ui)）。
+- **[后台唤醒录音 (Voice Wake)](https://docs.openclaw.ai/nodes/voicewake) + [交谈模式 (Talk Mode)](https://docs.openclaw.ai/nodes/talk)** — 支持在桌面及 iOS 上检测唤醒词汇并在 Android 上发起持续自由语音对话流。
+- **[控制外围节点 (Nodes)](https://docs.openclaw.ai/nodes)** — 提供画布、相机的实时捕获拦截、录制屏幕内容、获取位置 `location.get` 以及推送系统各类原生通知事件。支持 macOS 平台的专有 `system.run` 和 `system.notify`。
 
-## Tailscale access (Gateway dashboard)
+## Tailscale 内网穿透能力 (针对管理面板)
 
-OpenClaw can auto-configure Tailscale **Serve** (tailnet-only) or **Funnel** (public) while the Gateway stays bound to loopback. Configure `gateway.tailscale.mode`:
+当 Gateway 网关仅绑定并隐藏在本地回环地址 (`loopback`) 限制安全时，OpenClaw 可以直接在程序内置调用和自动配置 Tailscale 自身的 **Serve** (私有网络访问) 或者是 **Funnel** (公共 HTTPS 网络访问) 以提供给外部。通过配置项 `gateway.tailscale.mode`：
 
-- `off`: no Tailscale automation (default).
-- `serve`: tailnet-only HTTPS via `tailscale serve` (uses Tailscale identity headers by default).
-- `funnel`: public HTTPS via `tailscale funnel` (requires shared password auth).
+- `off`: 关闭自带的 Tailscale 自动化操作暴露 (默认项)。
+- `serve`: 使仅允许内部虚机访问的 HTTPS 开启, 底层机制调用 `tailscale serve` (通常利用 Tailscale 独有的识别验证请求头上报身份)。
+- `funnel`: 使该服务面向所有公网通过 HTTPS 暴露访问，底层调用 `tailscale funnel` (此模式强制要求为系统开启分享验证密码访问限制 `password`)。
 
-Notes:
+注意事项:
 
-- `gateway.bind` must stay `loopback` when Serve/Funnel is enabled (OpenClaw enforces this).
-- Serve can be forced to require a password by setting `gateway.auth.mode: "password"` or `gateway.auth.allowTailscale: false`.
-- Funnel refuses to start unless `gateway.auth.mode: "password"` is set.
-- Optional: `gateway.tailscale.resetOnExit` to undo Serve/Funnel on shutdown.
+- 只有 `gateway.bind` 参数保持 `loopback` (严格限制本地监听) 时，系统才允许执行 Serve/Funnel 内网穿透逻辑策略。
+- 对于 `serve` 私有暴露方式如果您想提高安全保障, 通过设置 `gateway.auth.mode: "password"` 或者 `gateway.auth.allowTailscale: false` 增加验证门槛。
+- `funnel` 公网外露如果被触发配置但未曾对网关进行密码加密保护 (`gateway.auth.mode: "password"`), 服务将拒绝启动。
+- (配置选项) 通过设置 `gateway.tailscale.resetOnExit` 以实现在服务下线和终止时候强制撤销清除当前创建的 Serve/Funnel 通信链路。
 
-Details: [Tailscale guide](https://docs.openclaw.ai/gateway/tailscale) · [Web surfaces](https://docs.openclaw.ai/web)
+详情参阅：[Tailscale 使用指南](https://docs.openclaw.ai/gateway/tailscale) · [Web 前端控制](https://docs.openclaw.ai/web)
 
-## Remote Gateway (Linux is great)
+## Gateway 远程部署 (最佳搭档：Linux)
 
-It’s perfectly fine to run the Gateway on a small Linux instance. Clients (macOS app, CLI, WebChat) can connect over **Tailscale Serve/Funnel** or **SSH tunnels**, and you can still pair device nodes (macOS/iOS/Android) to execute device‑local actions when needed.
+在闲置廉价的个人 Linux 云实例中安装充当网关是最有效完美的方法，所有不同载体的终端平台客户端都可以通过 **Tailscale Serve / Funnel 穿透** 或者直接建立 **SSH tunnels 加密隧道** 与网关通讯交互，此时甚至您的家庭本地 PC、Mac、或 iOS/Android 等也可以直接绑定连接以供云端的 AI 控制它们调用其专属接口。
 
-- **Gateway host** runs the exec tool and channel connections by default.
-- **Device nodes** run device‑local actions (`system.run`, camera, screen recording, notifications) via `node.invoke`.
-  In short: exec runs where the Gateway lives; device actions run where the device lives.
+- 单独分离出的服务器 **主 Gateway 服务环境** 将承担其运行繁重复杂的解析连接工作和通道负载交互。
+- 绑定在网络里的个人本地设备只以 **设备子节点 (Device Nodes)** 的轻量角色待命响应执行操作命令（如打开相机画面获取截流 / `system.run` 调用剪切板等指令处理并反馈）。
+  概括而言: 大模型代理的思维推理由拥有较好性能资源且连接外部服务的公网云主 Gateway 承揽，各种获取系统物理数据环境信息的实际执行代码则派发回各个 Device 设备终端环境触发。
 
-Details: [Remote access](https://docs.openclaw.ai/gateway/remote) · [Nodes](https://docs.openclaw.ai/nodes) · [Security](https://docs.openclaw.ai/gateway/security)
+指南详情请阅：[Remote access 终端控制](https://docs.openclaw.ai/gateway/remote) · [外围 Nodes 节点的理解](https://docs.openclaw.ai/nodes) · [安全性说明 Security](https://docs.openclaw.ai/gateway/security)
 
-## macOS permissions via the Gateway protocol
+## macOS Gateway 原生网关协议系统调用权限管理
 
-The macOS app can run in **node mode** and advertises its capabilities + permission map over the Gateway WebSocket (`node.list` / `node.describe`). Clients can then execute local actions via `node.invoke`:
+OpenClaw 提供的 macOS 原生系统级 app 可以被转换为 **纯独立子节点工作模式 (node mode)**，通过 Gateway 的 WebSocket 通道不断向主网关声明其具备的各项目能力信息及系统功能授权字典表集并完成上抛报告 (`node.list` / `node.describe`)。AI 或客户端则可以通过 RPC 机制下发回调直接控制该系统硬件设施并拉起相关子服务 (`node.invoke`)：
 
-- `system.run` runs a local command and returns stdout/stderr/exit code; set `needsScreenRecording: true` to require screen-recording permission (otherwise you’ll get `PERMISSION_MISSING`).
+- 最常见如 `system.run`: 会运行系统的 Bash 命令 / CLI 并异步拦截返回流信息；如果你命令开启了带有 `needsScreenRecording: true` (例如请求屏幕截图中遇到该标志)，而目标设备端由于权限不够，这将会自动回绝并反馈系统错误提示 `PERMISSION_MISSING` 予以说明拒绝处理的原因。
 - `system.notify` posts a user notification and fails if notifications are denied.
 - `canvas.*`, `camera.*`, `screen.record`, and `location.get` are also routed via `node.invoke` and follow TCC permission status.
 
-Elevated bash (host permissions) is separate from macOS TCC:
+提升权限的 bash 系统执行 (属于宿主底层权限) 与 macOS 的 TCC 安全机制是独立的两套逻辑：
 
-- Use `/elevated on|off` to toggle per‑session elevated access when enabled + allowlisted.
-- Gateway persists the per‑session toggle via `sessions.patch` (WS method) alongside `thinkingLevel`, `verboseLevel`, `model`, `sendPolicy`, and `groupActivation`.
+- 当允许并配备了白名单之后，可以使用指令 `/elevated on|off` 来在单一会话流之中对提升权限的使用状态进行切换。
+- 网关会在后台利用 `sessions.patch` WebSocket 接口记录保存下每一次开启的特权信息开关状态（类似于 `thinkingLevel` (思考深度配置), `verboseLevel` (日志繁琐等级), `model` (模型), `sendPolicy` (发送策略)，以及 `groupActivation` (群组被激活态)）。
 
-Details: [Nodes](https://docs.openclaw.ai/nodes) · [macOS app](https://docs.openclaw.ai/platforms/macos) · [Gateway protocol](https://docs.openclaw.ai/concepts/architecture)
+详细信息：[外设 Nodes 节点](https://docs.openclaw.ai/nodes) · [macOS 桌面版应用 App](https://docs.openclaw.ai/platforms/macos) · [Gateway 原生网关协议控制规范](https://docs.openclaw.ai/concepts/architecture)
 
-## Agent to Agent (sessions\_\* tools)
+## 多智能体工作协调通信 (Agent 互访 tools 会话机制)
 
-- Use these to coordinate work across sessions without jumping between chat surfaces.
-- `sessions_list` — discover active sessions (agents) and their metadata.
-- `sessions_history` — fetch transcript logs for a session.
-- `sessions_send` — message another session; optional reply‑back ping‑pong + announce step (`REPLY_SKIP`, `ANNOUNCE_SKIP`).
+- 当需要协调不同工作区的跨会话任务而不需要跳转不同前端控制面板时，可以使用以下指令集。
+- `sessions_list` — 发现并获取所有活动会话 (也就是不同身份代理) 和它们的系统元数据集。
+- `sessions_history` — 直接拉取出指定目标会话中的消息历史副本记录流。
+- `sessions_send` — 跨聊天向另一个代理 session 发送信息请求；你还可以配置额外操作，如可选收到带步骤回复播报的心跳 (`REPLY_SKIP`, `ANNOUNCE_SKIP`)。
 
-Details: [Session tools](https://docs.openclaw.ai/concepts/session-tool)
+详细使用说明：[Session 互联工具箱](https://docs.openclaw.ai/concepts/session-tool)
 
-## Skills registry (ClawHub)
+## AI 核心技能应用注册中心库 (ClawHub)
 
-ClawHub is a minimal skill registry. With ClawHub enabled, the agent can search for skills automatically and pull in new ones as needed.
+ClawHub 是一个极其轻量化纯粹的工具技能集线中心仓库。在启用后，您的 AI 代理就可以自主地进行全网搜索以在需要时自动拉取扩增自己不曾具备的新技能库。
 
-[ClawHub](https://clawhub.com)
+[探索 ClawHub](https://clawhub.com)
 
-## Chat commands
+## 聊天内置终端控制指令表
 
-Send these in WhatsApp/Telegram/Slack/Google Chat/Microsoft Teams/WebChat (group commands are owner-only):
+在支持的所有信使（如 WhatsApp, Telegram, Slack, Google Chat, Microsoft Teams 或 WebChat 网页端等）的输入框中发送以下内置配置命令就可以控制机器人当前行为逻辑 (注意：处于群聊组内使用此类管理指令时仅发起人/拥有者有权操作生效)：
 
-- `/status` — compact session status (model + tokens, cost when available)
-- `/new` or `/reset` — reset the session
-- `/compact` — compact session context (summary)
-- `/think <level>` — off|minimal|low|medium|high|xhigh (GPT-5.2 + Codex models only)
-- `/verbose on|off`
-- `/usage off|tokens|full` — per-response usage footer
-- `/restart` — restart the gateway (owner-only in groups)
-- `/activation mention|always` — group activation toggle (groups only)
+- `/status` — 输出紧凑的会话状态面板统计 (展示目前大模型 + 耗费 tokens 和可用计费信息等)
+- `/new` 或者 `/reset` — 打断强制重置当前此对话栈和上下文记忆
+- `/compact` — 从头精简/截断式归纳整理此前的长聊天上下文 (提炼精髓缩小数据负载)
+- `/think <等级>` — 可选 off (关闭) | minimal (最小) | low (低) | medium (中) | high (高) | xhigh (极高) (只有接入适配了推流的比如 GPT-5.2 系列 + Codex 等深层模型时有效)
+- `/verbose on|off` — 开启或关闭底层详细响应日志过程播报
+- `/usage off|tokens|full` — 设置回复底部自动追加每次生成的响应使用成本统计角标
+- `/restart` — 强制要求底层程序网关进行服务重启操作 (如果在群聊内发送，则只限机器人部署的 Owner 被授权执行)
+- `/activation mention|always` — 设置机器人在群聊内是被 `@` 才接话还是无条件时刻全通道倾听回复 (独属于群内)
 
-## Apps (optional)
+## 多端附加组件应用客户端生态 (可选特性)
 
-The Gateway alone delivers a great experience. All apps are optional and add extra features.
+仅运行后台主 Gateway 服务就已足够为您提供超棒的全核心体验功能，所有的全平台外围客户端仅仅只是可选择安装的以提供附加增强特性的选择。
 
-If you plan to build/run companion apps, follow the platform runbooks below.
+如果您想尝试基于多端运行其配套原生应用增强现实硬件体验，您可以参考后续各平台的操作部署运维手册 (Runbooks) 进行构建。
 
-### macOS (OpenClaw.app) (optional)
+### macOS 端 (即自带的独立的 OpenClaw.app) (可选)
 
-- Menu bar control for the Gateway and health.
-- Voice Wake + push-to-talk overlay.
-- WebChat + debug tools.
-- Remote gateway control over SSH.
+- 获取常驻在电脑顶部状态菜单栏图标下拉抽屉即可轻松掌握监视本机配置网关运行的软硬件健康态。
+- 获得了原生后置 [语音唤醒截流 (Voice Wake)] 与置顶的一键全局对讲交谈弹层 UI 控制窗口机制。
+- WebChat 以及开发测试使用的本地专属工具集面板入口。
+- 对绑定配对上的后台运行主网关执行更深一层级的跨系统级透明转发控制能力 (配合 SSH 协议)。
 
-Note: signed builds required for macOS permissions to stick across rebuilds (see `docs/mac/permissions.md`).
+注意：只有已验证使用 Apple 签名验证编译生成的该 App 包，才能被 macOS 操作核心准许和保持记录这些获取授权的行为逻辑 (参看开发文件 `docs/mac/permissions.md` 以获取代码内详)。
 
-### iOS node (optional)
+### iOS 移动端节点包 (可选)
 
-- Pairs as a node over the Gateway WebSocket (device pairing).
-- Voice trigger forwarding + Canvas surface.
-- Controlled via `openclaw nodes …`.
+- 将您的闲置手机平板转化为直接依附在您系统下充当提供其算与传感力的 WebRTC 高频连接网关通信客户端节点。
+- 实现提供录音设备以及将视觉展示前端屏幕化输出提供呈现 Canvas 控制功能。
+- 在宿主机服务内可以使用终端命令 `openclaw nodes …` 被列查并强制切断控制。
 
-Runbook: [iOS connect](https://docs.openclaw.ai/platforms/ios).
+相关安装联调指南：[iOS 并联手册](https://docs.openclaw.ai/platforms/ios)。
 
-### Android node (optional)
+### Android 移动端节点包 (可选)
 
-- Pairs as a WS node via device pairing (`openclaw devices ...`).
-- Exposes Connect/Chat/Voice tabs plus Canvas, Camera, Screen capture, and Android device command families.
-- Runbook: [Android connect](https://docs.openclaw.ai/platforms/android).
+- 与 iOS 近似，被定义并挂载到系统中的纯设备控制级后台 WS 通讯节点组 (利用配对指令接入： `openclaw devices ...`)。
+- 在 Android 这边我们提供了额外开放了丰富的控制功能：除了常规交谈通讯外更含有对本地日历提取/通讯录/电话短信控制截放发处理。
+- 相关安装联调指南：[Android 环境安装](https://docs.openclaw.ai/platforms/android)。
 
-## Agent workspace + skills
+## Agent Workspace 的资源树配置清单路径与外部拉取技能
 
-- Workspace root: `~/.openclaw/workspace` (configurable via `agents.defaults.workspace`).
+- 本地文件默认的隔离沙盘工作区所在为: `~/.openclaw/workspace` (也可以通过指定配置文件 `agents.defaults.workspace` 对它自定义变更重定向目录路径)。
 - Injected prompt files: `AGENTS.md`, `SOUL.md`, `TOOLS.md`.
 - Skills: `~/.openclaw/workspace/skills/<skill>/SKILL.md`.
 
-## Configuration
+## 配置指南 (Configuration)
 
-Minimal `~/.openclaw/openclaw.json` (model + defaults):
+一份最精简的 `~/.openclaw/openclaw.json` 配置展示 (设定模型和其他默认选项):
 
 ```json5
 {
@@ -327,26 +333,26 @@ Minimal `~/.openclaw/openclaw.json` (model + defaults):
 }
 ```
 
-[Full configuration reference (all keys + examples).](https://docs.openclaw.ai/gateway/configuration)
+[获取完整的配置文件参数参考手册 (包含所有键值对清单与示例).](https://docs.openclaw.ai/gateway/configuration)
 
-## Security model (important)
+## 安全模型与沙箱化 (极其重要)
 
-- **Default:** tools run on the host for the **main** session, so the agent has full access when it’s just you.
-- **Group/channel safety:** set `agents.defaults.sandbox.mode: "non-main"` to run **non‑main sessions** (groups/channels) inside per‑session Docker sandboxes; bash then runs in Docker for those sessions.
-- **Sandbox defaults:** allowlist `bash`, `process`, `read`, `write`, `edit`, `sessions_list`, `sessions_history`, `sessions_send`, `sessions_spawn`; denylist `browser`, `canvas`, `nodes`, `cron`, `discord`, `gateway`.
+- **默认设置:** 在 **主会话 (main session)** (也就是专门指代拥有者的对话) 中，AI 工具库均享有在宿主宿主机原生硬件级别的完全调用权限，这意味着它能随意访问您的私有桌面电脑。
+- **公共群聊/外部信道安全加固:** 通过设定配置项 `agents.defaults.sandbox.mode: "non-main"` 来使所有 **非主会话 (non‑main)** (即除了拥有者之外的任何群组或者公开授权的子频道) 强行丢进隔离的独立 Docker 容器沙箱内执行。这样的话，所有来自陌生人诱导的 bash 命令系统操作只会在 Docker 的受限虚机容器里运作。
+- **隔离沙盒权限黑白名单:** 沙盒环境中通常设置白名单机制，允许使用基础应用集 `bash`, `process`, `read`, `write`, `edit`, `sessions_list`, `sessions_history`, `sessions_send`, `sessions_spawn` 等；并主动拉黑高危本地桌面指令像 `browser`, `canvas`, `nodes`, `cron`, `discord`, `gateway` 等。
 
-Details: [Security guide](https://docs.openclaw.ai/gateway/security) · [Docker + sandboxing](https://docs.openclaw.ai/install/docker) · [Sandbox config](https://docs.openclaw.ai/gateway/configuration)
+详细了解：[安全访问管理指引](https://docs.openclaw.ai/gateway/security) · [Docker 及沙盒操作环境部署](https://docs.openclaw.ai/install/docker) · [隔离环境配置文件](https://docs.openclaw.ai/gateway/configuration)
 
 ### [WhatsApp](https://docs.openclaw.ai/channels/whatsapp)
 
-- Link the device: `pnpm openclaw channels login` (stores creds in `~/.openclaw/credentials`).
-- Allowlist who can talk to the assistant via `channels.whatsapp.allowFrom`.
-- If `channels.whatsapp.groups` is set, it becomes a group allowlist; include `"*"` to allow all.
+- 连接微信或您的手机设备: 通过终端运行 `npm run openclaw channels login` (会扫码将配对信息及登录凭证储存于 `~/.openclaw/credentials`)。
+- 通过配置 `channels.whatsapp.allowFrom` 为能够跟 AI 互动的合法联系人号码设定白名单。
+- 如果配置了 `channels.whatsapp.groups`，它会视作拉入允许生效的群聊白名单；包含 `"*"` 将完全放开拦截不设防允许全部对话。
 
 ### [Telegram](https://docs.openclaw.ai/channels/telegram)
 
-- Set `TELEGRAM_BOT_TOKEN` or `channels.telegram.botToken` (env wins).
-- Optional: set `channels.telegram.groups` (with `channels.telegram.groups."*".requireMention`); when set, it is a group allowlist (include `"*"` to allow all). Also `channels.telegram.allowFrom` or `channels.telegram.webhookUrl` + `channels.telegram.webhookSecret` as needed.
+- 系统变量中设置提供 `TELEGRAM_BOT_TOKEN` 环境变量或在配置文件内编辑属性 `channels.telegram.botToken` (环境变量优先级更高)。
+- (可选) 配置 `channels.telegram.groups` 结合参数 `channels.telegram.groups."*".requireMention`; 设置这块即开启对应群组白名单限制通行 (填入 `"*"` 以公开响应)。如果需要的话，也可以同时配合修改配置项 `channels.telegram.allowFrom` ，或架设 webhook (`channels.telegram.webhookUrl` + `channels.telegram.webhookSecret`)。
 
 ```json5
 {
@@ -360,12 +366,12 @@ Details: [Security guide](https://docs.openclaw.ai/gateway/security) · [Docker 
 
 ### [Slack](https://docs.openclaw.ai/channels/slack)
 
-- Set `SLACK_BOT_TOKEN` + `SLACK_APP_TOKEN` (or `channels.slack.botToken` + `channels.slack.appToken`).
+- 配置环境变量字典 `SLACK_BOT_TOKEN` + `SLACK_APP_TOKEN` (或是在设置文件对应 JSON 键名： `channels.slack.botToken` + `channels.slack.appToken`)。
 
 ### [Discord](https://docs.openclaw.ai/channels/discord)
 
-- Set `DISCORD_BOT_TOKEN` or `channels.discord.token` (env wins).
-- Optional: set `commands.native`, `commands.text`, or `commands.useAccessGroups`, plus `channels.discord.allowFrom`, `channels.discord.guilds`, or `channels.discord.mediaMaxMb` as needed.
+- 系统变量配置提供 `DISCORD_BOT_TOKEN` 或者修改 JSON 的 `channels.discord.token` (环境变量优先级高)。
+- 可选进阶属性项: 编辑 `commands.native`, `commands.text`, 或是配置 `commands.useAccessGroups` 等指令响应范式；按需为服务器追加配置群白名字典 `channels.discord.allowFrom` (私聊身份验证), `channels.discord.guilds` (支持公会黑名单) 或图片/文件上传兆数限制截断 `channels.discord.mediaMaxMb`。
 
 ```json5
 {
@@ -379,29 +385,29 @@ Details: [Security guide](https://docs.openclaw.ai/gateway/security) · [Docker 
 
 ### [Signal](https://docs.openclaw.ai/channels/signal)
 
-- Requires `signal-cli` and a `channels.signal` config section.
+- 需要操作系统层安装并具有 `signal-cli` 环境才能正常调用该扩展模块，需在配置中编写专门的声明块 `channels.signal`。
 
-### [BlueBubbles (iMessage)](https://docs.openclaw.ai/channels/bluebubbles)
+### [BlueBubbles (iMessage 跨端方案)](https://docs.openclaw.ai/channels/bluebubbles)
 
-- **Recommended** iMessage integration.
-- Configure `channels.bluebubbles.serverUrl` + `channels.bluebubbles.password` and a webhook (`channels.bluebubbles.webhookPath`).
-- The BlueBubbles server runs on macOS; the Gateway can run on macOS or elsewhere.
+- **强烈推荐** 用这种方式获取高稳定性的苹果 iMessage 集成支持。
+- 通过设置配置属性组 `channels.bluebubbles.serverUrl` 主服务器挂载点 + `channels.bluebubbles.password` 认证密钥并分配 Webhook 回调监听地址 (`channels.bluebubbles.webhookPath`)。
+- 搭建 BlueBubbles 收发服务器需要一台常亮的 macOS 主机做宿主；但你的 OpenClaw 主 Gateway 即便跑在 Linux 等不带苹果基因的地方也可以跨端直接调用。
 
-### [iMessage (legacy)](https://docs.openclaw.ai/channels/imessage)
+### [iMessage (古典接入法)](https://docs.openclaw.ai/channels/imessage)
 
-- Legacy macOS-only integration via `imsg` (Messages must be signed in).
-- If `channels.imessage.groups` is set, it becomes a group allowlist; include `"*"` to allow all.
+- macOS-only 的仅限 macOS 自己跑环境的原生保守接口派别，经由 `imsg` 组件暴露能力 (前提是你当前 Mac 电脑的 Messages.app 早已成功完成 iCloud 与手机双重确认配对了登录凭证)。
+- 当配置 `channels.imessage.groups` 时, 即成了激活 iMessage 对群聊监控的白名单校验逻辑表；填入通配符 `"*"` 就会直接允许其在全部消息群内无阻碍响应。
 
 ### [Microsoft Teams](https://docs.openclaw.ai/channels/msteams)
 
-- Configure a Teams app + Bot Framework, then add a `msteams` config section.
-- Allowlist who can talk via `msteams.allowFrom`; group access via `msteams.groupAllowFrom` or `msteams.groupPolicy: "open"`.
+- 前往建立并配置一个 Teams 应用 + Bot Framework，随后在设置里追加一个 `msteams` 对应的 JSON 配置块块。
+- 通过设置 `msteams.allowFrom` 为私聊通行设立白名单；若要放开群组准入请改写在 `msteams.groupAllowFrom` 获取 `msteams.groupPolicy: "open"` 字段内容。
 
-### [WebChat](https://docs.openclaw.ai/web/webchat)
+### [WebChat (专有网页对话框)](https://docs.openclaw.ai/web/webchat)
 
-- Uses the Gateway WebSocket; no separate WebChat port/config.
+- 通过网关的 WebSocket 发挥通信桥梁作用；无需为其划出特定的 WebChat 网络端口或复杂的前端设置。
 
-Browser control (optional):
+AI 控制外部浏览器设定 (可选):
 
 ```json5
 {
@@ -412,94 +418,91 @@ Browser control (optional):
 }
 ```
 
-## Docs
+## 全体系文档 (Docs)
 
-Use these when you’re past the onboarding flow and want the deeper reference.
+当您安全度过了配置向导起步期，请务必抽空研读这些更有深度的全方位的参考资料：
 
-- [Start with the docs index for navigation and “what’s where.”](https://docs.openclaw.ai)
-- [Read the architecture overview for the gateway + protocol model.](https://docs.openclaw.ai/concepts/architecture)
-- [Use the full configuration reference when you need every key and example.](https://docs.openclaw.ai/gateway/configuration)
-- [Run the Gateway by the book with the operational runbook.](https://docs.openclaw.ai/gateway)
-- [Learn how the Control UI/Web surfaces work and how to expose them safely.](https://docs.openclaw.ai/web)
-- [Understand remote access over SSH tunnels or tailnets.](https://docs.openclaw.ai/gateway/remote)
-- [Follow the onboarding wizard flow for a guided setup.](https://docs.openclaw.ai/start/wizard)
-- [Wire external triggers via the webhook surface.](https://docs.openclaw.ai/automation/webhook)
-- [Set up Gmail Pub/Sub triggers.](https://docs.openclaw.ai/automation/gmail-pubsub)
-- [Learn the macOS menu bar companion details.](https://docs.openclaw.ai/platforms/mac/menu-bar)
-- [Platform guides: Windows (WSL2)](https://docs.openclaw.ai/platforms/windows), [Linux](https://docs.openclaw.ai/platforms/linux), [macOS](https://docs.openclaw.ai/platforms/macos), [iOS](https://docs.openclaw.ai/platforms/ios), [Android](https://docs.openclaw.ai/platforms/android)
-- [Debug common failures with the troubleshooting guide.](https://docs.openclaw.ai/channels/troubleshooting)
-- [Review security guidance before exposing anything.](https://docs.openclaw.ai/gateway/security)
+- [官方文档导航枢纽：所有文档与指引的主入口](https://docs.openclaw.ai)
+- [网络架构和传输设计剖析：网关架构模型及其底层控制栈协议通信规范](https://docs.openclaw.ai/concepts/architecture)
+- [参数满编速查手册：含所有的设定对象结构定义大全，甚至支持直接检索复制粘贴对应参考示例](https://docs.openclaw.ai/gateway/configuration)
+- [Gateway (服务网关) : 操作管理与排错配置向导书](https://docs.openclaw.ai/gateway)
+- [Control UI 前端管理端 : 那些有关于外露端口控制的安全注意事项与暴露风险建议](https://docs.openclaw.ai/web)
+- [远距离无障碍组网指引 : SSH 与内网加密映射（Tailscale 安全隧道的网络穿透）全指南](https://docs.openclaw.ai/gateway/remote)
+- [引导系统运行原理揭秘 : 什么是向导、及其生命流程 (onboarding wizard)](https://docs.openclaw.ai/start/wizard)
+- [打通外部物理应用世界 (外部回调机制) : 一手学会设置基于通用 Webhook 接收发面功能操作指南](https://docs.openclaw.ai/automation/webhook)
+- [接收阅读电子邮箱数据流 : 架设订阅 Gmail 邮件事件触发生态](https://docs.openclaw.ai/automation/gmail-pubsub)
+- [macOS 无缝沉浸生态: 使用顶层状态栏常驻程序的专属小技巧](https://docs.openclaw.ai/platforms/mac/menu-bar)
+- [配套的操作系统平台专题指导系列合集: Windows (必装 WSL2 拓展)](https://docs.openclaw.ai/platforms/windows), [Linux 环境说明](https://docs.openclaw.ai/platforms/linux), [原生 macOS 构建](https://docs.openclaw.ai/platforms/macos), [移动端设备 iOS 整合](https://docs.openclaw.ai/platforms/ios), [Android 系统接入要求](https://docs.openclaw.ai/platforms/android)
+- [全能避坑排错除虫防身大百科全书专题：这里提供了极全丰富的各个踩坑案例复现集合 (Troubleshooting guide)](https://docs.openclaw.ai/channels/troubleshooting)
+- [向公网公开部署你的私聊大模型机器人的前置底线: 安全防护红线规避建议审查清单](https://docs.openclaw.ai/gateway/security)
 
-## Advanced docs (discovery + control)
+## 进阶与探索控制类文档 (Advanced docs)
 
-- [Discovery + transports](https://docs.openclaw.ai/gateway/discovery)
-- [Bonjour/mDNS](https://docs.openclaw.ai/gateway/bonjour)
-- [Gateway pairing](https://docs.openclaw.ai/gateway/pairing)
-- [Remote gateway README](https://docs.openclaw.ai/gateway/remote-gateway-readme)
-- [Control UI](https://docs.openclaw.ai/web/control-ui)
-- [Dashboard](https://docs.openclaw.ai/web/dashboard)
+- [智能连接发现与网络传输机制协议解读](https://docs.openclaw.ai/gateway/discovery)
+- [基于局域网的设备配对原理：Bonjour 或 mDNS](https://docs.openclaw.ai/gateway/bonjour)
+- [远程 Gateway 的互相验证绑定信任操作](https://docs.openclaw.ai/gateway/pairing)
+- [网关底层独立说明总览 (README 面板)](https://docs.openclaw.ai/gateway/remote-gateway-readme)
+- [面向管理者的浏览器操作面板入口详解 (Control UI)](https://docs.openclaw.ai/web/control-ui)
+- [全局网络状态总控展示窗介绍 (Dashboard)](https://docs.openclaw.ai/web/dashboard)
 
-## Operations & troubleshooting
+## 运行时后台管理与调试相关
 
-- [Health checks](https://docs.openclaw.ai/gateway/health)
-- [Gateway lock](https://docs.openclaw.ai/gateway/gateway-lock)
-- [Background process](https://docs.openclaw.ai/gateway/background-process)
-- [Browser troubleshooting (Linux)](https://docs.openclaw.ai/tools/browser-linux-troubleshooting)
-- [Logging](https://docs.openclaw.ai/logging)
+- [检测当前链路与健康情况查询](https://docs.openclaw.ai/gateway/health)
+- [对底层 Gateway 环境实例实施独占或锁定保护](https://docs.openclaw.ai/gateway/gateway-lock)
+- [基于后台静默处理的后台运行规范详解](https://docs.openclaw.ai/gateway/background-process)
+- [遇到 Linux 桌面上无头浏览器工具罢工该怎么办？(Troubleshooting)](https://docs.openclaw.ai/tools/browser-linux-troubleshooting)
+- [全局日志捕获追踪与输出机制说明 (Logging)](https://docs.openclaw.ai/logging)
 
-## Deep dives
+## AI 引擎核心执行机制解密解析区 (Deep dives)
 
-- [Agent loop](https://docs.openclaw.ai/concepts/agent-loop)
-- [Presence](https://docs.openclaw.ai/concepts/presence)
-- [TypeBox schemas](https://docs.openclaw.ai/concepts/typebox)
-- [RPC adapters](https://docs.openclaw.ai/reference/rpc)
-- [Queue](https://docs.openclaw.ai/concepts/queue)
+- [机器人内核底层的轮询及思维运行工作流 (Agent loop)](https://docs.openclaw.ai/concepts/agent-loop)
+- [各应用平台中的设备到岗与当前状态通知系统 (Presence)](https://docs.openclaw.ai/concepts/presence)
+- [配置接口类型的验证模型 (TypeBox schemas)](https://docs.openclaw.ai/concepts/typebox)
+- [RPC 远程调用中继配置层解析和设点 (RPC adapters)](https://docs.openclaw.ai/reference/rpc)
+- [对于接收及多端请求队列处理机制原理 (Queue)](https://docs.openclaw.ai/concepts/queue)
 
-## Workspace & skills
+## 工具和技能模板生态链搭建指导 (Workspace & skills)
 
-- [Skills config](https://docs.openclaw.ai/tools/skills-config)
-- [Default AGENTS](https://docs.openclaw.ai/reference/AGENTS.default)
-- [Templates: AGENTS](https://docs.openclaw.ai/reference/templates/AGENTS)
-- [Templates: BOOTSTRAP](https://docs.openclaw.ai/reference/templates/BOOTSTRAP)
-- [Templates: IDENTITY](https://docs.openclaw.ai/reference/templates/IDENTITY)
-- [Templates: SOUL](https://docs.openclaw.ai/reference/templates/SOUL)
-- [Templates: TOOLS](https://docs.openclaw.ai/reference/templates/TOOLS)
-- [Templates: USER](https://docs.openclaw.ai/reference/templates/USER)
+- [技能属性及设置管理入口配置文件](https://docs.openclaw.ai/tools/skills-config)
+- [核心机器代理默认启动策略: AGENTS](https://docs.openclaw.ai/reference/AGENTS.default)
+- [系统定制和调教模板: AGENTS](https://docs.openclaw.ai/reference/templates/AGENTS)
+- [系统定制和调教模板: BOOTSTRAP (开工初始化)](https://docs.openclaw.ai/reference/templates/BOOTSTRAP)
+- [系统定制和调教模板: IDENTITY (机器人身份定义认知设定)](https://docs.openclaw.ai/reference/templates/IDENTITY)
+- [系统定制和调教模板: SOUL (灵魂与性格感情参数设定)](https://docs.openclaw.ai/reference/templates/SOUL)
+- [系统定制和调教模板: TOOLS (外挂功能拓展和自定义插件编写模版)](https://docs.openclaw.ai/reference/templates/TOOLS)
+- [系统定制和调教模板: USER (针对所有者及特殊群体的个性化回复设定记忆)](https://docs.openclaw.ai/reference/templates/USER)
 
-## Platform internals
+## 操作系统的深层开发编译环境 (Platform internals)
 
-- [macOS dev setup](https://docs.openclaw.ai/platforms/mac/dev-setup)
-- [macOS menu bar](https://docs.openclaw.ai/platforms/mac/menu-bar)
-- [macOS voice wake](https://docs.openclaw.ai/platforms/mac/voicewake)
-- [iOS node](https://docs.openclaw.ai/platforms/ios)
-- [Android node](https://docs.openclaw.ai/platforms/android)
-- [Windows (WSL2)](https://docs.openclaw.ai/platforms/windows)
-- [Linux app](https://docs.openclaw.ai/platforms/linux)
+- [在 macOS 实盘上构建及验证底层功能测试环境 (dev setup)](https://docs.openclaw.ai/platforms/mac/dev-setup)
+- [深度定制：macOS 头顶上展示菜单栏工具配置修改](https://docs.openclaw.ai/platforms/mac/menu-bar)
+- [深度调用 macOS 原声底层并调整语音监听唤醒特性 (Voice Wake)](https://docs.openclaw.ai/platforms/mac/voicewake)
+- [魔改与单独拆装剥离 iOS 连接通讯节点代码 (iOS node)](https://docs.openclaw.ai/platforms/ios)
+- [Android Android 通讯客户端的自定义编译改建指南 (Android node)](https://docs.openclaw.ai/platforms/android)
+- [Windows (WSL2 下) 的独立安装注意事项说明](https://docs.openclaw.ai/platforms/windows)
+- [Linux 二进制端及组件结构支持说明 (Linux app)](https://docs.openclaw.ai/platforms/linux)
 
-## Email hooks (Gmail)
+## 自动化与外部挂载事件收发钩子组 (Email hooks)
 
-- [docs.openclaw.ai/gmail-pubsub](https://docs.openclaw.ai/automation/gmail-pubsub)
+- [使用指引参考 (docs.openclaw.ai/gmail-pubsub)](https://docs.openclaw.ai/automation/gmail-pubsub)
 
-## Molty
+## 感谢 Molty 老兄
 
-OpenClaw was built for **Molty**, a space lobster AI assistant. 🦞
-by Peter Steinberger and the community.
+OpenClaw 它的底色原本是为了这位居住于外层空间站名叫 **Molty (莫尔蒂)** 的龙虾 AI 私助助理 (由 Peter Steinberger 和狂热的极客社区建立而成) 🦞：
 
 - [openclaw.ai](https://openclaw.ai)
-- [soul.md](https://soul.md)
+- [soul.md (灵魂构建指南)](https://soul.md)
 - [steipete.me](https://steipete.me)
-- [@openclaw](https://x.com/openclaw)
+- [@openclaw 官方社交账号](https://x.com/openclaw)
 
-## Community
+## 交流社群 (Community)
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines, maintainers, and how to submit PRs.
-AI/vibe-coded PRs welcome! 🤖
+如果你热爱这个开源项目并希望提出 Pull Request 添加你的天才绝赞大模型创意！请参见指南文档 [贡献文档 (CONTRIBUTING.md)](CONTRIBUTING.md)，里面列举了合并规则以及各位维护者信息。感谢你们能为 AI 添加有趣的思想火花！🤖
 
-Special thanks to [Mario Zechner](https://mariozechner.at/) for his support and for
-[pi-mono](https://github.com/badlogic/pi-mono).
-Special thanks to Adam Doppelt for lobster.bot.
+特别致谢 [Mario Zechner](https://mariozechner.at/) 强大的支持，同样感激提供 [pi-mono 底层单体大核架构](https://github.com/badlogic/pi-mono) 体系。
+向来自 Adam Doppelt 的 `lobster.bot` (赛博龙虾机器人服务) 提供致谢鸣唤！
 
-Thanks to all clawtributors:
+在这里，由衷感谢所有为 Claw 贡献过的老伙伴们:
 
 <p align="left">
   <a href="https://github.com/steipete"><img src="https://avatars.githubusercontent.com/u/58493?v=4&s=48" width="48" height="48" alt="steipete" title="steipete"/></a> <a href="https://github.com/vincentkoc"><img src="https://avatars.githubusercontent.com/u/25068?v=4&s=48" width="48" height="48" alt="vincentkoc" title="vincentkoc"/></a> <a href="https://github.com/vignesh07"><img src="https://avatars.githubusercontent.com/u/1436853?v=4&s=48" width="48" height="48" alt="vignesh07" title="vignesh07"/></a> <a href="https://github.com/obviyus"><img src="https://avatars.githubusercontent.com/u/22031114?v=4&s=48" width="48" height="48" alt="obviyus" title="obviyus"/></a> <a href="https://github.com/mbelinky"><img src="https://avatars.githubusercontent.com/u/132747814?v=4&s=48" width="48" height="48" alt="Mariano Belinky" title="Mariano Belinky"/></a> <a href="https://github.com/sebslight"><img src="https://avatars.githubusercontent.com/u/19554889?v=4&s=48" width="48" height="48" alt="sebslight" title="sebslight"/></a> <a href="https://github.com/gumadeiras"><img src="https://avatars.githubusercontent.com/u/5599352?v=4&s=48" width="48" height="48" alt="gumadeiras" title="gumadeiras"/></a> <a href="https://github.com/Takhoffman"><img src="https://avatars.githubusercontent.com/u/781889?v=4&s=48" width="48" height="48" alt="Takhoffman" title="Takhoffman"/></a> <a href="https://github.com/thewilloftheshadow"><img src="https://avatars.githubusercontent.com/u/35580099?v=4&s=48" width="48" height="48" alt="thewilloftheshadow" title="thewilloftheshadow"/></a> <a href="https://github.com/cpojer"><img src="https://avatars.githubusercontent.com/u/13352?v=4&s=48" width="48" height="48" alt="cpojer" title="cpojer"/></a>
