@@ -258,7 +258,7 @@ export async function ensureControlUiAssetsBuilt(
     };
   }
 
-  runtime.log("Control UI assets missing; building (ui:build, auto-installs UI deps)…");
+  runtime.log("Control UI assets missing; building (ui:build, auto-installs UI deps)… (缺少 Control UI 资源；正在构建中...)");
 
   const build = await runCommandWithTimeout([process.execPath, uiScript, "build"], {
     cwd: repoRoot,

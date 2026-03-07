@@ -112,7 +112,7 @@ async function runGatewayHealthCheck(params: {
         "https://docs.openclaw.ai/gateway/health",
         "https://docs.openclaw.ai/gateway/troubleshooting",
       ].join("\n"),
-      "Health check help",
+      "Health check help (健康检查帮助)",
     );
   }
 }

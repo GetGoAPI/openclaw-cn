@@ -122,8 +122,8 @@ export async function finalizeOnboardingWizard(
           });
     if (flow === "quickstart") {
       await prompter.note(
-        "QuickStart uses Node for the Gateway service (stable + supported).",
-        "Gateway service runtime",
+        "QuickStart uses Node for the Gateway service (stable + supported). (QuickStart 使用 Node 作为网关服务 - 稳定且受支持)",
+        "Gateway service runtime (网关服务运行时)",
       );
     }
     const service = resolveGatewayService();
@@ -204,11 +204,11 @@ export async function finalizeOnboardingWizard(
         installError = err instanceof Error ? err.message : String(err);
       } finally {
         progress.stop(
-          installError ? "Gateway service install failed." : "Gateway service installed.",
+          installError ? "Gateway service install failed. (网关服务安装失败)" : "Gateway service installed. (网关服务已安装)",
         );
       }
       if (installError) {
-        await prompter.note(`Gateway service install failed: ${installError}`, "Gateway");
+        await prompter.note(`Gateway service install failed: ${installError}\n(网关服务安装失败: ${installError})`, "Gateway (网关)");
         await prompter.note(gatewayInstallErrorHint(), "Gateway");
       }
     }
@@ -233,11 +233,11 @@ export async function finalizeOnboardingWizard(
       runtime.error(formatHealthCheckFailure(err));
       await prompter.note(
         [
-          "Docs:",
+          "Docs: (文档：)",
           "https://docs.openclaw.ai/gateway/health",
           "https://docs.openclaw.ai/gateway/troubleshooting",
         ].join("\n"),
-        "Health check help",
+        "Health check help (健康检查帮助)",
       );
     }
   }
@@ -253,12 +253,12 @@ export async function finalizeOnboardingWizard(
 
   await prompter.note(
     [
-      "Add nodes for extra features:",
-      "- macOS app (system + notifications)",
-      "- iOS app (camera/canvas)",
-      "- Android app (camera/canvas)",
+      "Add nodes for extra features: (添加节点以获取额外功能：)",
+      "- macOS app (system + notifications) (macOS 应用 - 系统与通知)",
+      "- iOS app (camera/canvas) (iOS 应用 - 相机与画布)",
+      "- Android app (camera/canvas) (Android 应用 - 相机与画布)",
     ].join("\n"),
-    "Optional apps",
+    "Optional apps (可选应用)",
   );
 
   const controlUiBasePath =
@@ -323,7 +323,7 @@ export async function finalizeOnboardingWizard(
     ]
       .filter(Boolean)
       .join("\n"),
-    "Control UI",
+    "Control UI (控制中心 UI)",
   );
 
   let controlUiOpened = false;
@@ -402,12 +402,12 @@ export async function finalizeOnboardingWizard(
           `Dashboard link (with token): ${authedUrl}`,
           controlUiOpened
             ? "Opened in your browser. Keep that tab to control OpenClaw."
-            : "Copy/paste this URL in a browser on this machine to control OpenClaw.",
+            : "Copy/paste this URL in a browser on this machine to control OpenClaw. (在此机器的浏览器中复制/粘贴此 URL 以控制 OpenClaw。)",
           controlUiOpenHint,
         ]
           .filter(Boolean)
           .join("\n"),
-        "Dashboard ready",
+        "Dashboard ready (控制面板已就绪)",
       );
     } else {
       await prompter.note(
@@ -421,15 +421,15 @@ export async function finalizeOnboardingWizard(
 
   await prompter.note(
     [
-      "Back up your agent workspace.",
+      "Back up your agent workspace. (备份您的代理工作区。)",
       "Docs: https://docs.openclaw.ai/concepts/agent-workspace",
     ].join("\n"),
-    "Workspace backup",
+    "Workspace backup (工作区备份)",
   );
 
   await prompter.note(
     "Running agents on your computer is risky — harden your setup: https://docs.openclaw.ai/security",
-    "Security",
+    "Security (安全)",
   );
 
   await setupOnboardingShellCompletion({ flow, prompter });
@@ -463,12 +463,12 @@ export async function finalizeOnboardingWizard(
         `Dashboard link (with token): ${authedUrl}`,
         controlUiOpened
           ? "Opened in your browser. Keep that tab to control OpenClaw."
-          : "Copy/paste this URL in a browser on this machine to control OpenClaw.",
+          : "Copy/paste this URL in a browser on this machine to control OpenClaw. (在此机器的浏览器中复制/粘贴此 URL 以控制 OpenClaw。)",
         controlUiOpenHint,
       ]
         .filter(Boolean)
         .join("\n"),
-      "Dashboard ready",
+      "Dashboard ready (控制面板已就绪)",
     );
   }
 
@@ -496,19 +496,19 @@ export async function finalizeOnboardingWizard(
       : [
           "To enable web search, your agent will need an API key for either Perplexity Search or Brave Search.",
           "",
-          "Set it up interactively:",
+          "Set it up interactively: (交互式设置：)",
           `- Run: ${formatCliCommand("openclaw configure --section web")}`,
-          "- Choose a provider and paste your API key",
+          "- Choose a provider and paste your API key (选择一个提供商并粘贴您的 API 密钥)",
           "",
           "Alternative: set PERPLEXITY_API_KEY or BRAVE_API_KEY in the Gateway environment (no config changes).",
           "Docs: https://docs.openclaw.ai/tools/web",
         ].join("\n"),
-    "Web search (optional)",
+    "Web search (optional) (网页搜索 - 可选)",
   );
 
   await prompter.note(
     'What now: https://openclaw.ai/showcase ("What People Are Building").',
-    "What now",
+    "What now (接下来做什么)",
   );
 
   await prompter.outro(
@@ -516,7 +516,7 @@ export async function finalizeOnboardingWizard(
       ? "Onboarding complete. Dashboard opened; keep that tab to control OpenClaw."
       : seededInBackground
         ? "Onboarding complete. Web UI seeded in the background; open it anytime with the dashboard link above."
-        : "Onboarding complete. Use the dashboard link above to control OpenClaw.",
+        : "Onboarding complete. Use the dashboard link above to control OpenClaw. (向导完成。使用上面的仪表板链接控制 OpenClaw。)",
   );
 
   return { launchedTui };

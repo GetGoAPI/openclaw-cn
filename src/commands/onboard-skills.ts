@@ -203,7 +203,7 @@ export async function setupSkills(
       continue;
     }
     const wantsKey = await prompter.confirm({
-      message: `Set ${skill.primaryEnv} for ${skill.name}?`,
+      message: `Set ${skill.primaryEnv} for ${skill.name}? (为 ${skill.name} 设置 ${skill.primaryEnv} 吗？)`,
       initialValue: false,
     });
     if (!wantsKey) {

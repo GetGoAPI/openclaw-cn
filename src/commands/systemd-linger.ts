@@ -36,7 +36,7 @@ export async function ensureSystemdUserLingerInteractive(params: {
   const status = await readSystemdUserLingerStatus(env);
   if (!status) {
     await prompter.note(
-      "Unable to read loginctl linger status. Ensure systemd + loginctl are available.",
+      "Unable to read loginctl linger status. Ensure systemd + loginctl are available. (无法读取 loginctl linger 状态。请确保 systemd + loginctl 可用。)",
       title,
     );
     return;
